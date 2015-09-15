@@ -1,0 +1,14 @@
+
+CREATE TABLE `events` (
+	ID int NOT NULL AUTO_INCREMENT,
+  `date` varchar(200) DEFAULT NULL,
+  `title` varchar(200) DEFAULT NULL,
+  `eventDesc` varchar(1000) DEFAULT NULL,
+  `location` varchar(200) DEFAULT NULL,
+  `eventTime` varchar(200) DEFAULT NULL,
+  `category` varchar(200) DEFAULT NULL,
+  `link` varchar(200) DEFAULT NULL,
+  `contactPerson` varchar(100) DEFAULT NULL,
+  `emailId` varchar(200) DEFAULT NULL,
+  PRIMARY KEY (ID)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
