@@ -12,4 +12,16 @@
  *
  *= require_tree .
  *= require_self
+ *= require devise_bootstrap_views_less
  */
+
+@font-face {
+  font-family: 'Glyphicons Halflings';
+  src: url('/assets/glyphicons-halflings-regular.eot');
+  src: url('/assets/glyphicons-halflings-regular.eot?#iefix') format('embedded-opentype'), url('/assets/glyphicons-halflings-regular.woff') format('woff'), url('/assets/glyphicons-halflings-regular.ttf') format('truetype'), url('/assets/glyphicons-halflings-regular.svg#glyphicons_halflingsregular') format('svg');
+}
+
+/* applied to Signin, Signup */
+.panel.panel-default {
+  width: 30%
+}

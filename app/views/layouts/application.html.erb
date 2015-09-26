@@ -5,10 +5,95 @@
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body>
+  <% if current_user %>
+  <div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="/">GoChron</a>
+      </div>
 
-<%= yield %>
+      <div class="navbar-collapse collapse" id="searchbar">
+        <ul class="nav navbar-nav navbar-right">
+          <li><a href="about.html">About</a></li>
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Settings <span class="caret"></span></a>
+            <ul class="dropdown-menu">
+              <li><a href="#">Profile</a></li>
+              <li><a href="#">Security</a></li>
+              <li role="separator" class="divider"></li>
+              <li>
+                <%= link_to('Logout', destroy_user_session_path, :method => :delete) %> 
+              </li>
+            </ul>
+          </li>
+        </ul>
 
+       <form class="navbar-form">
+          <div class="form-group" style="display:inline;">
+            <div class="input-group" style="display:table;">
+              <span class="input-group-addon" style="width:1%;"><span class="glyphicon glyphicon-search"></span></span>
+              <input class="form-control" name="search" placeholder="Search Here" autocomplete="off" autofocus="autofocus" type="text">
+            </div>
+          </div>
+        </form>
+
+      </div><!--/.nav-collapse -->
+    </div>
+  </div>
+
+<!-- <nav class="navbar navbar&#45;inverse navbar&#45;static&#45;top"> -->
+<!--   <div class="container&#45;fluid"> -->
+<!--     <!&#45;&#45; Brand and toggle get grouped for better mobile display &#45;&#45;> -->
+<!--     <div class="navbar&#45;header"> -->
+<!--       <button type="button" class="navbar&#45;toggle collapsed" data&#45;toggle="collapse" data&#45;target="#bs&#45;example&#45;navbar&#45;collapse&#45;1" aria&#45;expanded="false"> -->
+<!--         <span class="sr&#45;only">Toggle navigation</span> -->
+<!--         <span class="icon&#45;bar"></span> -->
+<!--         <span class="icon&#45;bar"></span> -->
+<!--         <span class="icon&#45;bar"></span> -->
+<!--       </button> -->
+<!--       <a class="navbar&#45;brand" href="/">goChron</a> -->
+<!--     </div> -->
+<!--  -->
+<!--     <!&#45;&#45; Collect the nav links, forms, and other content for toggling &#45;&#45;> -->
+<!--     <div class="collapse navbar&#45;collapse" id="bs&#45;example&#45;navbar&#45;collapse&#45;1"> -->
+<!--       <form class="navbar&#45;form navbar&#45;left" role="search"> -->
+<!--         <div class="form&#45;group"> -->
+<!--           <input type="text" class="form&#45;control" placeholder="Search"> -->
+<!--         </div> -->
+<!--         <button type="submit" class="btn btn&#45;default">Submit</button> -->
+<!--       </form> -->
+<!--  -->
+      <!-- <ul class="nav navbar&#45;nav navbar&#45;right"> -->
+      <!--   <li class="dropdown"> -->
+      <!--     <a href="#" class="dropdown&#45;toggle" data&#45;toggle="dropdown" role="button" aria&#45;haspopup="true" aria&#45;expanded="false">Settings <span class="caret"></span></a> -->
+      <!--     <ul class="dropdown&#45;menu"> -->
+      <!--       <li><a href="#">Action</a></li> -->
+      <!--       <li><a href="#">Another action</a></li> -->
+      <!--       <li><a href="#">Something else here</a></li> -->
+      <!--       <li role="separator" class="divider"></li> -->
+      <!--       <li><a href="#">Separated link</a></li> -->
+      <!--     </ul> -->
+      <!--   </li> -->
+      <!-- </ul> -->
+
+
+<!--     </div><!&#45;&#45; /.navbar&#45;collapse &#45;&#45;> -->
+<!--   </div><!&#45;&#45; /.container&#45;fluid &#45;&#45;> -->
+<!-- </nav> -->
+
+  <% end %>
+  <div class="container">
+    <p class="notice"><%= notice %></p>
+    <p class="alert"><%= alert %></p>
+    <%= yield %>
+  </div>
 </body>
 </html>
