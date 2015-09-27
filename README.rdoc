@@ -1,6 +1,7 @@
+Installation Requirements
 Make sure you have `rvm` and `ruby-2.2.1` installed.
 
-Launching:
+Launch
 
   1. rvm gemset use 2.2.1@rails4.2.4 --create
 
@@ -9,7 +10,7 @@ Launching:
   3. rails s
 
 
-Some DEVISE specific stuff:
+Specific to Device
 
   1. Ensure you have defined default url options in your environments files. Here
      is an example of default_url_options appropriate for a development environment
