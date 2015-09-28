@@ -11,7 +11,7 @@ public class WebCrawler {
 	
 	
 	public static void main(String[] args){
-		//ufcalendar();
+		ufcalendar();
 		collegiatelink();
 	}
 	
@@ -70,5 +70,71 @@ public class WebCrawler {
 		}
 	}
 	
+	public static void ufcalendar(){
+		WebDriver driver = new FirefoxDriver();
+		driver.get("http://calendar.ufl.edu/?view=all&month=09&day=10&year=2015&");
+		ArrayList<WebElement> eventdate = (ArrayList<WebElement>)driver.findElements(By.className("eventdate"));
+		ArrayList<WebElement> event = (ArrayList<WebElement>)driver.findElements(By.className("event"));
+		ArrayList<Event> allEvents = new ArrayList<Event>(); 
+		int count = eventdate.size();
+		for(int i = 0; i<count; i++){
+			Event eve = new Event();
+			try{
+			eve.setDate(eventdate.get(i).getText());
+			//System.out.println(eventdate.get(i).getText());
+			
+			WebElement eventDetail = event.get(i).findElement(By.className("eventtitle"));
+			eve.setTitle(eventDetail.getText());
+			eve.setLink(eventDetail.findElement(By.tagName("a")).getAttribute("href"));
+			//System.out.println(eventDetail.findElement(By.tagName("a")).getAttribute("href"));
+			//System.out.println(eventDetail.getText());
+			
+			eve.setEventDesc(event.get(i).findElement(By.className("description")).getText());
+			//System.out.println(event.get(i).findElement(By.className("description")).getText());
+			
+			ArrayList<WebElement> info = (ArrayList<WebElement>) event.get(i).findElements(By.tagName("dd"));
+			eve.setEventTime(info.get(0).getText());
+			//System.out.println(info.get(0).getText());
+			
+			try{
+			eve.setCategory(info.get(1).getText());
+			//System.out.println(info.get(1).getText());
+			}catch(Exception e){
+				eve.setCategory("");
+			}
+			allEvents.add(eve);
+			}catch(Exception e){
+				continue;
+			}
+		}
+		
+		int totalLink = allEvents.size();
+		for(int i = 0; i < totalLink; i++){
+			driver.get(allEvents.get(i).getLink());
+			WebElement detail = driver.findElement(By.className("clearfix"));
+			try{
+			ArrayList<WebElement> links = (ArrayList<WebElement>) detail.findElements(By.tagName("a"));
+			//System.out.println(links.get(0).getText());
+			allEvents.get(i).setContactPerson(links.get(0).getText());
+			String[] email = links.get(0).getAttribute("href").split(":");
+			//System.out.println(email[1]);
+			allEvents.get(i).setEmailId(email[1]);
+			allEvents.get(i).setContactPerson(email[0]);
+			}catch(Exception e){
+				System.out.println("Error 1");
+			}
+			
+			try{
+			String fulldetail = detail.getText();
+			String[] data = fulldetail.split("Location:");
+			String[] loc = data[1].split("Download iCalendar");
+			//System.out.println(loc[0]);
+			allEvents.get(i).setLocation(loc[0]);
+			}catch(Exception e){
+				System.out.println("Error 2");
+			}
+			DAO.AddEvent(allEvents.get(i));
+		}
+	}
 	
 }
