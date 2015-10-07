@@ -1,0 +1,23 @@
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h4><%= t('.sign_up', :default => "Sign up") %></h4>
+  </div>
+  <div class="panel-body">
+    <%= form_for :event, html: { role: "form" } do |f| %>
+      <div class="form-group">
+        <%= f.label :eventname %>
+        <%= f.eventname_field :eventname, autofocus: true, class: "form-control" %>
+      </div>
+      <div class="form-group">
+        <%= f.label :eventdescription <%= f.label :eventname %>
+        <%= f.edescription_field:eventdescription, autofocus: true, class: "form-control" %>
+      </div>
+      <div class="form-group">
+        <%= f.label :eventtime %>
+        <%= f.etime_field :eventtime, class: "form-control" %>
+      </div>
+      <div>
+      </div>
+    <% end %> 	
+   </div>	
+</div>

@@ -3,7 +3,7 @@ class Event
   include Mongoid::Timestamps
 
   field :title, type: String
-  field :datetime, type: DateTime
+  field :datetime, type: String
   field :description, type: String
   field :location, type: String
   field :link, type: String

@@ -1,0 +1,34 @@
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h4><%= "Create Event" %></h4>
+  </div>
+  <div class="panel-body">
+    <%= form_for :event, url: events_path, html: { role: "form" } do |f| %>
+      <div class="form-group">
+        <%= f.label :title %>
+        <%= f.text_field :title, autofocus: true, class: "form-control" %>
+      </div>
+      <div class="form-group">
+        <%= f.label :access_type %>
+        <%= f.text_field :access_type, autofocus: true, class: "form-control" %>
+      </div>
+      <div class="form-group">
+        <%= f.label :description %><br />
+        <%= f.text_area :description, class: "form-control" %>
+      </div>
+      <div class="form-group">
+        <%= f.label :location %>
+        <%= f.text_field :location, class: "form-control" %>
+      </div>
+      <div class="form-group">
+        <%= f.label :datetime %>
+        <%= f.text_field :datetime, class: "form-control" %>
+      </div>
+      <div class="form-group">
+        <%= f.label :link %>
+        <%= f.text_field :link, class: "form-control" %>
+      </div>
+      <%= f.submit , class: "btn btn-primary" %>
+    <% end %>
+  </div>
+</div>
