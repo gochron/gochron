@@ -10,7 +10,7 @@ Launch
   3. rails s
 
 
-Specific to Device
+Specific to Devise
 
   1. Ensure you have defined default url options in your environments files. Here
      is an example of default_url_options appropriate for a development environment
