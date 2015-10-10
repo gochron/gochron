@@ -26,7 +26,7 @@
 
   <div class="col-xs-3">
     <%@public_event.each do |eve|%>
-      <h3><%=eve.title%></h1>
+      <h4><%=eve.title%></h4>
       <p><%=eve.description%></p>
       <p><span class="glyphicon glyphicon-home">&nbsp</span><%=eve.location%></p>
       <p><span class="glyphicon glyphicon-time">&nbsp</span><%=Date.parse(eve.datetime).strftime("%b %d, %Y")%></p>
