@@ -1,9 +1,9 @@
 <div class="row">
   <div class="btn-group" role="group" aria-label="FilterButtons">
-    <button type="button" class="btn btn-default">My Created</button>
-    <button type="button" class="btn btn-default">Attending</button>
-    <button type="button" class="btn btn-default">Subscribed</button>
-    <button type="button" class="btn btn-default">All Events</button>
+    <%= link_to 'My Created',events_path(:request_type => 'MyEvents'), class: "btn btn-default" %>
+    <%= link_to 'Attending',events_path(:request_type => 'Going'), class: "btn btn-default" %>
+    <%= link_to 'Subscribed',events_path(:request_type => 'Subscribed'), class: "btn btn-default" %>
+    <%= link_to 'All Events',events_path(:request_type => 'All'), class: "btn btn-default" %>
   </div>
   <hr/>
 </div>
@@ -26,9 +26,13 @@
             <td><%= e.title %></td>
             <td><%= e.datetime.strftime("%b %dth %Y %I:%M%P") %></td>
             <td><%= e.location %></td>
-            <td><%= link_to 'Show',event_path(e), class: "btn btn-default btn-sm" %> 
-            <%= link_to 'Edit',edit_event_path(e), class: "btn btn-default btn-sm" %> 
-            <%= link_to 'Delete',event_path(e),method: :delete, data: {confirm: 'Are you sure?'}, class: "btn btn-default btn-sm" %></td>
+            <% if e.user_id == current_user.id %> 
+            	<td><%= link_to 'Show',event_path(e), class: "btn btn-default btn-sm" %> 
+            	<%= link_to 'Edit',edit_event_path(e), class: "btn btn-default btn-sm" %> 
+            	<%= link_to 'Delete',event_path(e),method: :delete, data: {confirm: 'Are you sure?'}, class: "btn btn-default btn-sm" %></td>
+            <% else %>
+		 <td><%= link_to 'Show',event_path(e), class: "btn btn-default btn-sm" %>  </td>
+	    <% end %>	
           </tr>
         <% end %>
       </table>

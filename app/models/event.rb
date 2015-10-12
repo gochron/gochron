@@ -2,7 +2,7 @@ class Event
   include Mongoid::Document
   include Mongoid::Timestamps
   include Mongoid::Sadstory
-
+  belongs_to :user
   field :title, type: String
   field :datetime, type: DateTime
   field :description, type: String
