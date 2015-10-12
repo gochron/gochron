@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'notifications/notify'
+
   devise_for :users
   resources :events
   # get 'home/index'
