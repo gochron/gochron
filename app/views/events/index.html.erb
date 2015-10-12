@@ -1,14 +1,17 @@
-<ul class="nav nav-tabs">
-  <li class="active"><a data-toggle="tab" href="#home">My Created</a></li>
-  <li><a data-toggle="tab" href="#menu1">Going</a></li>
-  <li><a data-toggle="tab" href="#menu2">Subscribed</a></li>
-  <li><a data-toggle="tab" href="#menu3">All Events</a></li>
-</ul>
+<div class="row">
+  <div class="btn-group" role="group" aria-label="FilterButtons">
+    <button type="button" class="btn btn-default">My Created</button>
+    <button type="button" class="btn btn-default">Attending</button>
+    <button type="button" class="btn btn-default">Subscribed</button>
+    <button type="button" class="btn btn-default">All Events</button>
+  </div>
+  <hr/>
+</div>
+
 <div class="row">
   <div class="tab-content">
     <div id="home" class="tab-pane fade in active">
-      <br/>
-      <%= link_to 'Create',new_event_path, class: "btn btn-default" %>
+      <%= link_to 'Create',new_event_path, class: "btn btn-default btn-sm" %>
       <br/>
       <br/>
       <table class="table">
@@ -16,18 +19,19 @@
           <th>Event</th>
           <th>Date &amp; Time</th>
           <th>Location</th>
+          <th></th>
         </tr>
         <% @events.each do |e| %>
           <tr>
             <td><%= e.title %></td>
-            <td><%= e.datetime.strftime("%B %d %Y %I:%M%P") %></td>
+            <td><%= e.datetime.strftime("%b %dth %Y %I:%M%P") %></td>
             <td><%= e.location %></td>
-            <td><%= link_to 'Show',event_path(e), class: "btn btn-default" %> <%= link_to 'Edit',edit_event_path(e), class: "btn btn-default" %> <%= link_to 'Delete',event_path(e),method: :delete, data: {confirm: 'Are you sure?'}, class: "btn btn-default" %></td>
+            <td><%= link_to 'Show',event_path(e), class: "btn btn-default btn-sm" %> 
+            <%= link_to 'Edit',edit_event_path(e), class: "btn btn-default btn-sm" %> 
+            <%= link_to 'Delete',event_path(e),method: :delete, data: {confirm: 'Are you sure?'}, class: "btn btn-default btn-sm" %></td>
           </tr>
         <% end %>
       </table>
-    </div>
-    <div id="menu1" class="tab-pane fade">
     </div>
   </div>
 </div>
