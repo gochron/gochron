@@ -23,5 +23,6 @@
 
 /* applied to Signin, Signup */
 .panel.panel-default {
-  width: 30%
+  width: 30%;
+  margin:auto
 }
