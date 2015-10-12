@@ -29,6 +29,9 @@ gem 'twitter-bootstrap-rails'
 
 gem 'devise'
 gem 'devise-bootstrap-views'
+gem 'htmlbeautifier'
+gem 'pry'
+gem 'mongoid-sadstory'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 

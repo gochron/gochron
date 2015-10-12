@@ -25,8 +25,8 @@
         <%= f.text_field :title, autofocus: true, class: "form-control" %>
       </div>
       <div class="form-group">
-        <%= f.label :access_type %>
-        <%= f.text_field :access_type, autofocus: true, class: "form-control" %>
+        <%= f.label :access_type %><br/>
+        <%= f.select :access_type, ["public", "private", "closed"] %>
       </div>
       <div class="form-group">
         <%= f.label :description %><br />
@@ -37,15 +37,15 @@
         <%= f.text_field :location, class: "form-control" %>
       </div>
       <div class="form-group">
-        <%= f.label :datetime %>
-        <%= f.text_field :datetime, class: "form-control" %>
+        <%= f.label :datetime %><br/>
+        <%= f.datetime_select :datetime %>
       </div>
       <div class="form-group">
         <%= f.label :link %>
         <%= f.text_field :link, class: "form-control" %>
       </div>
-      <%= f.submit :default => "create event", class: "btn btn-primary btn-sm" %>
-       <%= link_to 'Back to Events',events_path, class: "btn btn-primary btn-sm" %>	
+      <%= f.submit :default => "Submit", class: "btn btn-primary btn-sm" %>
+       <%= link_to 'Back',events_path, class: "btn btn-primary btn-sm" %>	
     <% end %>
   </div>
 </div>

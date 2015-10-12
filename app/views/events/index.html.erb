@@ -1,54 +1,33 @@
-<div id="main-container" class="container">
-  <ul class="nav nav-tabs">
-    <li class="active"><a data-toggle="tab" href="#home">My Events</a></li>
-    <li><a data-toggle="tab" href="#menu1">Upcoming Events</a></li>
-    <li><a data-toggle="tab" href="#menu2">Subscribed Events</a></li>
-    <li><a data-toggle="tab" href="#menu3">All Events</a></li>
-  </ul>
-</div>
-
+<ul class="nav nav-tabs">
+  <li class="active"><a data-toggle="tab" href="#home">My Created</a></li>
+  <li><a data-toggle="tab" href="#menu1">Going</a></li>
+  <li><a data-toggle="tab" href="#menu2">Subscribed</a></li>
+  <li><a data-toggle="tab" href="#menu3">All Events</a></li>
+</ul>
 <div class="row">
-  <div class="col-xs-9">
-    <div class="tab-content">
-      <div id="home" class="tab-pane fade in active">
-	<%= link_to 'Create New Event',new_event_path, class: "button",right: "200px" %> 
-	<table>
-	<tr>
-	    <td>
-	    </td>
-            <td> <% @events.each do |event|%>
-	        <div class="panel-body">
-		      <div class="form-group">
-		         <h6><b><%= "Event Name:" %></b></h6>
-	        	  <%= event.title %>
-	              </div>
-		      <div class="form-group">
-		        <h6><b><%= "Access typee:" %></b></h6>
-        		<%= event.access_type %>
-	     	      </div>
-      		      <div class="form-group">
-        		<h6><b><%= "Description:" %></b></h6>
-        		<%= event.description %>
-      		      </div>
-	      	      <div class="form-group">
-        		<h6><b><%= "Location:" %></b></h6>
-		        <%= event.location %>
-	              </div>
-		      <div class="form-group">
-		        <h6><b><%= "Date/Time:" %></b></h6>
-		        <%= event.datetime %>
-	              </div>
-	              <div class="form-group">
-		        <h6><b><%= "Event link:" %></b></h6>
-		        <%= event.link %>
-	              </div>
-   		 <%= link_to 'Edit',edit_event_path(event), class: "btn btn-primary" %>
-		 <%= link_to 'Remove',event_path(event),method: :delete, data: {confirm: 'Are you sure?'}, class: "btn btn-primary" %>
-      	       </div>
-	       <%end%>
-</td></tr></table>
-      </div>
-      <div id="menu1" class="tab-pane fade">
-      </div>
-</div></div></div>	
-          
+  <div class="tab-content">
+    <div id="home" class="tab-pane fade in active">
+      <br/>
+      <%= link_to 'Create',new_event_path, class: "btn btn-default" %>
+      <br/>
+      <br/>
+      <table class="table">
+        <tr>
+          <th>Event</th>
+          <th>Date &amp; Time</th>
+          <th>Location</th>
+        </tr>
+        <% @events.each do |e| %>
+          <tr>
+            <td><%= e.title %></td>
+            <td><%= e.datetime.strftime("%B %d %Y %I:%M%P") %></td>
+            <td><%= e.location %></td>
+            <td><%= link_to 'Show',event_path(e), class: "btn btn-default" %> <%= link_to 'Edit',edit_event_path(e), class: "btn btn-default" %> <%= link_to 'Delete',event_path(e),method: :delete, data: {confirm: 'Are you sure?'}, class: "btn btn-default" %></td>
+          </tr>
+        <% end %>
+      </table>
+    </div>
+    <div id="menu1" class="tab-pane fade">
+    </div>
+  </div>
+</div>

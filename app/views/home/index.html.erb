@@ -2,10 +2,9 @@
   <h2>Welcome</h2>
   <ul class="nav nav-tabs">
     <li class="active"><a data-toggle="tab" href="#home">All Events</a></li>
-    <li><a data-toggle="tab" href="#menu1">Subscribe</a></li>
-    <li><a data-toggle="tab" href="#menu2">Registered</a></li>
+    <li><a data-toggle="tab" href="#menu1">Subscribed</a></li>
+    <li><a data-toggle="tab" href="#menu2">Going</a></li>
   </ul>
-</div>
 
 <div class="row">
   <div class="col-xs-9">
@@ -78,7 +77,7 @@
       <h3><%=eve.title%></h1>
       <p><%=eve.description%></p>
       <p><span class="glyphicon glyphicon-home">&nbsp</span><%=eve.location%></p>
-      <p><span class="glyphicon glyphicon-time">&nbsp</span><%=Date.parse(eve.datetime).strftime("%b %d, %Y")%></p>
+      <p><span class="glyphicon glyphicon-time">&nbsp</span><%=eve.datetime.strftime("%B %d %Y %I:%M%P")%></p>
       <p><%=eve.link%></p>
       <hr>
     <%end%>
@@ -86,3 +85,4 @@
 </div>
 </div>
 
+</div>
