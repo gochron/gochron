@@ -1,0 +1,88 @@
+<div id="main-container" class="container">
+<h2>Welcome</h2>
+  <ul class="nav nav-tabs">
+    <li class="active"><a data-toggle="tab" href="#home">All Events</a></li>
+    <li><a data-toggle="tab" href="#menu1">Subscribe</a></li>
+    <li><a data-toggle="tab" href="#menu2">Registered</a></li>
+  </ul>
+</div>
+
+	<div class="row">
+		<div class="col-xs-9">
+			<div class="tab-content">
+    <div id="home" class="tab-pane fade in active">
+      <h3>All Events</h3>
+      <h3 id="month">
+	<%= link_to "<", date: @date.prev_month %>
+	<%= @date.strftime("%B %Y")%>
+        <%= link_to ">", date: @date.next_month %>
+      </h3>
+      <div id="article">
+	<%= calendar @date do |date| %>
+		<%= date.day %>
+		<% if @event_by_date[date]%>
+			<ul>
+				<% @event_by_date[date].each do |event|%>
+				<li><%= event.title%></li>		
+				<% end %>
+			</ul>
+		<% end %>
+	<% end %>
+      </div>
+    </div>
+    <div id="menu1" class="tab-pane fade">
+      <h3>Subscribed</h3>
+	<h3 id="month">
+	<%= link_to "<", date: @date.prev_month %>
+	<%= @date.strftime("%B %Y")%>
+        <%= link_to ">", date: @date.next_month %>
+      </h3>
+      <div id="article">
+	<%= calendar @date do |date| %>
+		<%= date.day %>
+		<% if @event_by_date[date]%>
+			<ul>
+				<% @event_by_date[date].each do |event|%>
+				<li><%= event.title%></li>		
+				<% end %>
+			</ul>
+		<% end %>
+	<% end %>
+      </div>
+      </div>
+    <div id="menu2" class="tab-pane fade">
+      <h3>Registered</h3>
+	<h3 id="month">
+	<%= link_to "<", date: @date.prev_month %>
+	<%= @date.strftime("%B %Y")%>
+        <%= link_to ">", date: @date.next_month %>
+      </h3>
+      <div id="article">
+	<%= calendar @date do |date| %>
+		<%= date.day %>
+		<% if @event_by_date[date]%>
+			<ul>
+				<% @event_by_date[date].each do |event|%>
+				<li><%= event.title%></li>		
+				<% end %>
+			</ul>
+		<% end %>
+	<% end %>
+      </div>
+      </div>
+  </div>
+
+		</div>
+		<div class="col-xs-3">
+			<%@public_event.each do |eve|%>
+<h3><%=eve.title%></h1>
+<p><%=eve.description%></p>
+<p><span class="glyphicon glyphicon-home">&nbsp</span><%=eve.location%></p>
+<p><span class="glyphicon glyphicon-time">&nbsp</span><%=Date.parse(eve.datetime).strftime("%b %d, %Y")%></p>
+<p><%=eve.link%></p>
+<hr>
+<%end%>
+		</div>
+	</div>
+</div>
+
