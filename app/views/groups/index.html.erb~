@@ -1,8 +1,8 @@
 <div class="row">
   <div class="btn-group" role="group" aria-label="FilterButtons">
-    <button type="button" class="btn btn-default">My Created</button>
-    <button type="button" class="btn btn-default">Subscribed</button>
-    <button type="button" class="btn btn-default">All Groups</button>
+    <%= link_to 'Created',groups_path(:request_type => 'MyGroups'), class: "btn btn-default" %>
+    <%= link_to 'Subscribed',groups_path(:request_type => 'Subscribed'), class: "btn btn-default" %>
+    <%= link_to 'All Groups',groups_path(:request_type => 'All'), class: "btn btn-default" %>
   </div>
   <hr/>
 </div>
@@ -18,7 +18,7 @@
           <th>Group</th>
           <th></th>
         </tr>
-        <% @groups.each do |group| %>
+        <% @group.each do |group| %>
           <tr>
             <td><%= group.name %></td>
             <td><%= link_to 'Show',group_path(group), class: "btn btn-default btn-sm" %> 

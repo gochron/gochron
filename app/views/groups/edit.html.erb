@@ -1,0 +1,35 @@
+ <div>
+</div>
+   <%= form_for :group, url: group_path, html: { role: "form" } do |group| %>
+       <% if @group.errors.any? %>
+    	<div id="error_explanation">
+      	<h2>
+        <%= pluralize(@group.errors.count, "error") %> prohibited
+	        this article from being saved:
+     	 </h2>
+      	<ul>
+        <% @group.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      	</ul>
+    	</div>
+    <% end %>	
+<div class="panel panel-default">
+   <div class="panel-heading">
+    <h4><%= "Edit Group" %></h4>
+  </div>
+
+   <div class="panel-body">
+      <div class="form-group">
+        <%= group.label :name %>
+        <%= group.text_field :name, autofocus: true, class: "form-control" %>
+      </div>
+      <div class="form-group">
+        <%= group.label :description %><br />
+        <%= group.text_area :description, class: "form-control" %>
+      </div>
+      <%= group.submit :default => "Submit", class: "btn btn-primary btn-sm" %>
+       <%= link_to 'Back',groups_path, class: "btn btn-primary btn-sm" %>	
+    <% end %>
+  </div>
+</div>
