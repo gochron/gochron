@@ -18,7 +18,7 @@
           <th>Group</th>
           <th></th>
         </tr>
-        <% @group.each do |group| %>
+        <% @groups.each do |group| %>
           <tr>
             <td><%= group.name %></td>
             <td><%= link_to 'Show',group_path(group), class: "btn btn-default btn-sm" %> 
