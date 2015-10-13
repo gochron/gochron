@@ -5,7 +5,8 @@ class User
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable,
          :confirmable
-  has_many :event
+
+
   ## Database authenticatable
   field :email,              type: String, default: ""
   field :encrypted_password, type: String, default: ""
@@ -34,4 +35,10 @@ class User
   # field :failed_attempts, type: Integer, default: 0 # Only if lock strategy is :failed_attempts
   # field :unlock_token,    type: String # Only if unlock strategy is :email or :both
   # field :locked_at,       type: Time
+
+  has_many :events
+  has_many :groups
+  has_and_belongs_to_many :attending_events, class_name: "Event", inverse_of: :attendees
+  has_and_belongs_to_many :subscribed_groups, class_name: "Group", inverse_of: :subscribers
+
 end
