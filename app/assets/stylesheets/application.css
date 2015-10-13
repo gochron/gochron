@@ -26,3 +26,11 @@
   width: 50%;
   margin:auto;
 }
+body
+{
+    background: url('ct2.jpg') no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
