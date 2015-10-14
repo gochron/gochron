@@ -26,11 +26,15 @@
   width: 50%;
   margin:auto;
 }
-body
+body.beforelogin
 {
     background: url('ct2.jpg') no-repeat center center fixed;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
     background-size: cover;
+}
+
+.row.tabfilters {
+  padding-top: 10px;
 }
