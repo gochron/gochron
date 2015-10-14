@@ -1,7 +1,9 @@
-<div style="display:inline-block;vertical-align:top;">
-    <img src="/logo.png" height=90 width=90 alt="Logo" />
-</div>
+
+    <img src="/logo.png" height=90 width=90 alt="Logo" /><br>
+
 <%= bootstrap_devise_error_messages! %>
+<p class="alert" style="color:red;text-indent:270px"><%= alert %></p>
+
 <div class="panel panel-default">
   <div class="panel-heading">
     <h4 style='display:inline-block'><%= t('.forgot_your_password', :default => 'Forgot your password?') %></h4>
