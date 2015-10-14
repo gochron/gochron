@@ -1,10 +1,12 @@
 <div style="display:inline-block;vertical-align:top;">
-    <img src="/logo.png" height=90 width=90 alt="Logo"/>
+    <img src="/logo.png" height=90 width=90 alt="Logo" />
 </div>
 <div style="display:inline-block;text-align:center">
-    <div><h2>GoChron</h2></div>
+    <div><h2></h2></div>
+    <%= bootstrap_devise_error_messages! %>
 </div><br>
-<%= bootstrap_devise_error_messages! %>
+
+    
 <div class="panel panel-default">
   <div class="panel-heading">
     <h4><%= t('.sign_up', :default => "Sign up") %></h4>
