@@ -4,7 +4,7 @@
 <!--   <li><a data&#45;toggle="tab" href="#menu2">Attending</a></li> -->
 <!-- </ul> -->
 
-<div class="row tabfilters">
+<div class="row">
   <div class="btn-group" role="group" aria-label="FilterButtons">
     <%= link_to 'All Events',root_path(:request_type => 'All'), class: "btn btn-default" %>
     <%= link_to 'Subscribed',root_path(:request_type => 'Subscribed'), class: "btn btn-default" %>
@@ -26,13 +26,17 @@
         <div id="article">
           <%= calendar @date do |date| %>
 		        <%= date.day %>
-	          <% if @event_by_date[date]%>
-			        <ul>
-				        <% @event_by_date[date].each do |event|%>
-			            <li><%= event.title %></li>
-				        <% end %>
-			        </ul>
-		        <% end %>
+<% @event_by_date.each do |key,value|%>
+
+		<%if key.to_s==date.to_s%>
+<ul>
+		<%value.each do |val|%>
+			<li><%= val.title %></li>
+		<%end%>
+</ul>
+		<%end%>
+                <%end%>
+	          
           <% end %>
         </div>
       </div>
@@ -46,13 +50,7 @@
         <div id="article">
 	        <%= calendar @date do |date| %>
 		        <%= date.day %>
-		          <% if @event_by_date[date]%>
-			          <ul>
-				          <% @event_by_date[date].each do |event|%>
-				           <li><%= event.title%></li>		
-				          <% end %>
-			          </ul>
-		          <% end %>
+		          
 	        <% end %>
         </div>
       </div>
@@ -66,13 +64,7 @@
         <div id="article">
 	        <%= calendar @date do |date| %>
 	          <%= date.day %>
-		        <% if @event_by_date[date]%>
-			        <ul>
-				        <% @event_by_date[date].each do |event|%>
-				          <li><%= event.title%></li>		
-				        <% end %>
-			        </ul>
-		        <% end %>
+		        
 	        <% end %>
         </div>
       </div>
