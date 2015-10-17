@@ -72,6 +72,7 @@
   </div>
 
   <div class="col-xs-3">
+    <div class="scroll">	
     <%@public_event.each do |eve|%>
       <h3><%=link_to(eve.title, event_path(eve.id))%></h1>
       <p><%=eve.description%></p>
@@ -80,6 +81,7 @@
       <p><%=eve.link%></p>
       <hr>
     <%end%>
+  </div>
   </div>
 </div>
 </div>
