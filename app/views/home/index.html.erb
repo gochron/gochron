@@ -4,13 +4,13 @@
 <!--   <li><a data&#45;toggle="tab" href="#menu2">Attending</a></li> -->
 <!-- </ul> -->
 
-<div class="row">
-  <div class="btn-group" role="group" aria-label="FilterButtons">
+<div class="row" style="padding-top:7%">
+ <div class="btn-group" role="group" aria-label="FilterButtons">
     <%= link_to 'All Events',root_path(:request_type => 'All'), class: "btn btn-default" %>
     <%= link_to 'Subscribed',root_path(:request_type => 'Subscribed'), class: "btn btn-default" %>
     <%= link_to 'Attending',root_path(:request_type => 'Attending'), class: "btn btn-default" %>
   </div>
-  <hr/>
+<hr/>
 </div>
 
 <div class="row">
@@ -26,8 +26,7 @@
         <div id="article">
           <%= calendar @date do |date| %>
 		        <%= date.day %>
-<% @event_by_date.each do |key,value|%>
-
+		<% @event_by_date.each do |key,value|%>
 		<%if key.to_s==date.to_s%>
 <ul>
 		<%value.each do |val|%>
@@ -70,16 +69,18 @@
       </div>
     </div>
   </div>
-
+  
   <div class="col-xs-3">
     <div class="scroll">	
-    <%@public_event.each do |eve|%>
+    <%@event.each do |eve|%>
+      <%if eve.datetime>Time.new%>
       <h3><%=link_to(eve.title, event_path(eve.id))%></h1>
       <p><%=eve.description%></p>
       <p><span class="glyphicon glyphicon-home">&nbsp</span><%=eve.location%></p>
       <p><span class="glyphicon glyphicon-time">&nbsp</span><%=eve.datetime.strftime("%b %dth %Y %I:%M%P")%></p>
       <p><%=eve.link%></p>
       <hr>
+     <%end%>
     <%end%>
   </div>
   </div>
