@@ -74,15 +74,34 @@
     <div class="scroll">	
     <%@event.each do |eve|%>
       <%if eve.datetime>Time.new%>
-      <h3><%=link_to(eve.title, event_path(eve.id))%></h1>
+<div class="container">
+      <div class="header"><span><h3><%=eve.title%></h3></span>
+</div>
+<div class="content">
       <p><%=eve.description%></p>
       <p><span class="glyphicon glyphicon-home">&nbsp</span><%=eve.location%></p>
       <p><span class="glyphicon glyphicon-time">&nbsp</span><%=eve.datetime.strftime("%b %dth %Y %I:%M%P")%></p>
       <p><%=eve.link%></p>
+</div>
       <hr>
+</div>
      <%end%>
     <%end%>
+
   </div>
   </div>
 </div>
 </div>
+<script>
+$(".header").hover(function () {
+    $header = $(this);
+    //getting the next element
+    $content = $header.next();
+    //open up the content needed - toggle the slide- if visible, slide up, if not slidedown.
+    $content.slideToggle(500, function () {
+        //execute this after slideToggle is done
+        //change text of header based on visibility of content div
+    });
+});
+
+</script>

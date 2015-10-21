@@ -51,5 +51,19 @@
 
 div.scroll{
 height : 500px;
-overflow:scroll;
+overflow-y:scroll;
+overflow-x:hidden;
 }
+.container {
+    width:100%;
+}
+.container .header {
+    padding: 2px;
+    cursor: pointer;
+    font-weight: bold;
+}
+.container .content {
+    display: none;
+    padding : 5px;
+}
+
