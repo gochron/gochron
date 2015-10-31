@@ -26,6 +26,7 @@
   width: 50%;
   margin:auto;
 }
+
 body.beforelogin
 {
     background: url('ct2.jpg') no-repeat center center fixed;
@@ -36,5 +37,5 @@ body.beforelogin
 }
 
 .row.tabfilters {
-  padding-top: 10px;
+  margin-top: 70px;
 }
