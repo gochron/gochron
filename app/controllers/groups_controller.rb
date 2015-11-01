@@ -41,6 +41,15 @@ class GroupsController < ApplicationController
      end
    end
 
+  def update
+    @group = Group.find(params[:id])
+    if @group.update((params[:group].permit(:name,:description)))
+     redirect_to @group
+    else
+     render 'edit'
+    end
+  end
+
     def destroy
     @group = Group.find(params[:id])
     @group.destroy

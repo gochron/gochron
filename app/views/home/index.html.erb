@@ -3,16 +3,14 @@
 <!--   <li><a data&#45;toggle="tab" href="#menu1">Subscribed</a></li> -->
 <!--   <li><a data&#45;toggle="tab" href="#menu2">Attending</a></li> -->
 <!-- </ul> -->
-
-<div class="row tabfilters">
+<div class="row navbar-clearance">
   <div class="btn-group" role="group" aria-label="FilterButtons">
     <%= link_to 'All Events',root_path(:request_type => 'All'), class: "btn btn-default" %>
     <%= link_to 'Subscribed',root_path(:request_type => 'Subscribed'), class: "btn btn-default" %>
     <%= link_to 'Attending',root_path(:request_type => 'Attending'), class: "btn btn-default" %>
   </div>
-<hr/>
+  <hr/>
 </div>
-
 <div class="row">
   <div class="col-xs-9">
     <div class="tab-content">
@@ -22,86 +20,79 @@
           <%= @date.strftime("%B %Y")%>
           <%= link_to ">", date: @date.next_month %>
         </h3>
-
         <div id="article">
           <%= calendar @date do |date| %>
-		        <%= date.day %>
-		<% @event_by_date.each do |key,value|%>
-		<%if key.to_s==date.to_s%>
-<ul>
-		<%value.each do |val|%>
-			<li><%= val.title %></li>
-		<%end%>
-</ul>
-		<%end%>
-                <%end%>
-	          
+            <%= date.day %>
+            <% @event_by_date.each do |key,value|%>
+              <%if key.to_s==date.to_s%>
+                <ul>
+                  <%value.each do |val|%>
+                    <li><%= val.title %></li>
+                  <%end%>
+                </ul>
+              <%end%>
+            <%end%>
           <% end %>
         </div>
       </div>
-
       <div id="menu1" class="tab-pane fade">
-	      <h3 id="month">
-	        <%= link_to "<", date: @date.prev_month %>
-    	    <%= @date.strftime("%B %Y")%>
+        <h3 id="month">
+          <%= link_to "<", date: @date.prev_month %>
+          <%= @date.strftime("%B %Y")%>
           <%= link_to ">", date: @date.next_month %>
         </h3>
         <div id="article">
-	        <%= calendar @date do |date| %>
-		        <%= date.day %>
-		          
-	        <% end %>
+          <%= calendar @date do |date| %>
+            <%= date.day %>
+          <% end %>
         </div>
       </div>
-
       <div id="menu2" class="tab-pane fade">
-	      <h3 id="month">
-	        <%= link_to "<", date: @date.prev_month %>
-	        <%= @date.strftime("%B %Y")%>
+        <h3 id="month">
+          <%= link_to "<", date: @date.prev_month %>
+          <%= @date.strftime("%B %Y")%>
           <%= link_to ">", date: @date.next_month %>
         </h3>
         <div id="article">
-	        <%= calendar @date do |date| %>
-	          <%= date.day %>
-		        
-	        <% end %>
+          <%= calendar @date do |date| %>
+            <%= date.day %>
+          <% end %>
         </div>
       </div>
     </div>
   </div>
-  
   <div class="col-xs-3">
-    <div class="scroll">	
-    <%@event.each do |eve|%>
-      <%if eve.datetime>Time.new%>
-<div class="container">
-      <div class="header"><span><h3><%=eve.title%></h3></span>
-</div>
-<div class="content">
-      <p><%=eve.description%></p>
-      <p><span class="glyphicon glyphicon-home">&nbsp</span><%=eve.location%></p>
-      <p><span class="glyphicon glyphicon-time">&nbsp</span><%=eve.datetime.strftime("%b %dth %Y %I:%M%P")%></p>
-      <p><%=eve.link%></p>
-</div>
-      <hr>
-</div>
-     <%end%>
-    <%end%>
-
-  </div>
+    <div class="scroll">
+      <%@event.each do |eve|%>
+        <%if eve.datetime>Time.new%>
+          <div class="container">
+            <div class="header"><span>
+                <h3><%=eve.title%></h3>
+              </span>
+            </div>
+            <div class="content">
+              <p><%=eve.description%></p>
+              <p><span class="glyphicon glyphicon-home">&nbsp</span><%=eve.location%></p>
+              <p><span class="glyphicon glyphicon-time">&nbsp</span><%=eve.datetime.strftime("%b %dth %Y %I:%M%P")%></p>
+              <p><%=eve.link%></p>
+            </div>
+            <hr>
+          </div>
+        <%end%>
+      <%end%>
+    </div>
   </div>
 </div>
 </div>
 <script>
-$(".header").hover(function () {
-    $header = $(this);
-    //getting the next element
-    $content = $header.next();
-    //open up the content needed - toggle the slide- if visible, slide up, if not slidedown.
-    $content.slideToggle(500, function () {
-        //execute this after slideToggle is done
-        //change text of header based on visibility of content div
-    });
-});
-
+  $(".header").hover(function () {
+      $header = $(this);
+      //getting the next element
+      $content = $header.next();
+      //open up the content needed - toggle the slide- if visible, slide up, if not slidedown.
+      $content.slideToggle(500, function () {
+          //execute this after slideToggle is done
+          //change text of header based on visibility of content div
+      });
+  });
 </script>

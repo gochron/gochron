@@ -27,6 +27,10 @@
   margin:auto;
 }
 
+.panel.panel-default.webform {
+  margin:0px;
+}
+
 body.beforelogin
 {
     background: url('ct2.jpg') no-repeat center center fixed;
@@ -36,6 +40,10 @@ body.beforelogin
     background-size: cover;
 }
 
-.row.tabfilters {
+.row.navbar-clearance {
   margin-top: 70px;
+}
+
+.webforms {
+  width: 50%;
 }

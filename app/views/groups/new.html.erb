@@ -1,15 +1,1 @@
-<h1> New Group </h1>
-
-<%= form_for :group, url: groups_path, html: { role: "form" } do |f| %>
-  <div class="form-group">
-    <%= f.label :name %>
-    <%= f.text_field :name, autofocus: true, class: "form-control" %>
-  </div>
-  <div class="form-group">
-    <%= f.label :Description %><br />
-    <%= f.text_area :description, class: "form-control" %>
-  </div>
-  <%= f.submit t('.sign_up', :default => "Create Group"), class: "btn btn-primary" %>
-  <%= link_to 'Back',groups_path, class: "btn btn-primary" %>
-<% end %>
-
+<%= render 'form' %>
