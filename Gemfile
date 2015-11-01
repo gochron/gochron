@@ -26,7 +26,6 @@ gem "mongoid", "~> 4.0.0"
 gem 'therubyracer'
 gem 'less-rails'
 gem 'twitter-bootstrap-rails'
-
 gem 'devise'
 gem 'devise-bootstrap-views'
 gem 'htmlbeautifier'

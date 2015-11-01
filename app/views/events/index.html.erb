@@ -7,7 +7,6 @@
   </div>
   <hr/>
 </div>
-
 <div class="row">
   <div class="tab-content">
     <div id="home" class="tab-pane fade in active">
@@ -19,22 +18,33 @@
           <th>Event</th>
           <th>Date &amp; Time</th>
           <th>Location</th>
+	  <th>Actions</th>	
           <th></th>
         </tr>
-        <% @events.each do |e| %>
+	<% if @events.nil? %>
+	<%else%>  	
+	  <% @events.each do |e| %>
           <tr>
-            <td><%= e.title %></td>
+            <td><%= link_to e.title,event_path(e) %></td>
             <td><%= e.datetime.strftime("%b %dth %Y %I:%M%P") %></td>
             <td><%= e.location %></td>
-            <% if e.user_id == current_user.id %> 
-            	<td><%= link_to 'Show',event_path(e), class: "btn btn-default btn-sm" %> 
-            	<%= link_to 'Edit',edit_event_path(e), class: "btn btn-default btn-sm" %> 
-            	<%= link_to 'Delete',event_path(e),method: :delete, data: {confirm: 'Are you sure?'}, class: "btn btn-default btn-sm" %></td>
-            <% else %>
-		 <td><%= link_to 'Show',event_path(e), class: "btn btn-default btn-sm" %>  </td>
-	    <% end %>	
-          </tr>
+             <% if e.attendee_ids.include? current_user.id %>
+		<td><li class="dropdown">
+		<a class="btn btn-default btn-sm" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Going<span class="caret"></span></a>
+                <ul class="dropdown-menu">
+		<li>                    <%= link_to "Remove", attend_event_path(e,:request_type => 'Remove'), method: :post%> </li>
+                  </ul></li>
+            	<% else %>
+		<td>
+		<a><%= link_to 'Join', attend_event_path(e,:request_type => 'Join'), method: :post,class: "btn btn-default btn-sm"  %></a>
+            	<% end %>
+	    	<% if e.user_id == current_user.id %> 
+            		<%= link_to 'Edit',edit_event_path(e),class: "btn btn-default btn-sm"%> 
+              		<%= link_to 'Delete',event_path(e),method: :delete, data: {confirm: 'Are you sure?'},class: "btn btn-default btn-sm" %></td>
+           	 <% end %>	  
+	</tr>
         <% end %>
+	<% end %>
       </table>
     </div>
   </div>
