@@ -16,9 +16,9 @@
     <div class="tab-content">
       <div id="home" class="tab-pane fade in active">
         <h3 id="month">
-          <%= link_to "<", date: @date.prev_month %>
+          <%= link_to '', root_path(date: @date.prev_month), class: "btn btn-default btn-sm glyphicon glyphicon-chevron-left"  %>
           <%= @date.strftime("%B %Y")%>
-          <%= link_to ">", date: @date.next_month %>
+          <%= link_to '', root_path(date: @date.next_month), class: "btn btn-default btn-sm glyphicon glyphicon-chevron-right"  %>
         </h3>
         <div id="article">
           <%= calendar @date do |date| %>

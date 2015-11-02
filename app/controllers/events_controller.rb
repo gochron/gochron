@@ -8,7 +8,7 @@ before_action :authenticate_user!
 	@events = Event.all 
     elsif params[:request_type] == 'MyEvents'
         @events = Event.where(:user_id => current_user.id)
-    elsif params[:request_type] == 'Going'
+    elsif params[:request_type] == 'Attending'
         @events = Event.where(:id.in => current_user.attending_event_ids)
     elsif params[:request_type] == 'Subscribed'
         @events = Event.where(:user_id => current_user.id)
