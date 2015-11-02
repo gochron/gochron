@@ -6,7 +6,6 @@
   </div>
   <hr/>
 </div>
-
 <div class="row">
   <div class="tab-content">
     <div id="home" class="tab-pane fade in active">
@@ -20,14 +19,13 @@
         </tr>
         <% @group.each do |group| %>
           <tr>
-            <td><%= group.name %></td>
+            <td><%= link_to(group.name, group_path(group)) %></td>
+            <td>
             <% if group.user_id == current_user.id %> 
-               <td><%= link_to 'Show',group_path(group), class: "btn btn-default btn-sm" %> 
-               <%= link_to 'Edit',edit_group_path(group), class: "btn btn-default btn-sm" %> 
-               <%= link_to 'Delete',group_path(group),method: :delete, data: {confirm: 'Are you sure?'}, class: "btn btn-default btn-sm" %></td>
-	    <% else %>
-		 <td><%= link_to 'Show',group_path(group), class: "btn btn-default btn-sm" %>  </td>
-	    <% end %>
+               <%= link_to '',edit_group_path(group),class: "btn btn-default btn-sm glyphicon glyphicon-pencil"%>
+               <%= link_to '',group_path(group),method: :delete, data: {confirm: 'Are you sure?'},class: "btn btn-default btn-sm glyphicon glyphicon-trash" %>
+           <% end %>
+           </td>
           </tr>
         <% end %>
       </table>

@@ -1,33 +1,34 @@
-<div class="panel panel-default">
-  <div class="panel-heading">
-    <h4><%= "Event Added" %></h4>
-  </div>
-  <div class="panel-body">
+<div class="row navbar-clearance">
+  <div class="panel panel-default webform">
+    <div class="panel-heading">
+      <h4><%= "Event Details" %></h4>
+    </div>
+    <div class="panel-body">
       <div class="form-group">
-      	 <h6><b><%= "Event Name:" %></b></h6>
-	  <%= @event.title %>
+        <h6><b><%= "Event Name:" %></b></h6>
+        <%= @event.title %>
       </div>
       <div class="form-group">
         <h6><b><%= "Access typee:" %></b></h6>
         <%= @event.access_type %>
       </div>
       <div class="form-group">
-	<h6><b><%= "Description:" %></b></h6>
+        <h6><b><%= "Description:" %></b></h6>
         <%= @event.description %>
       </div>
       <div class="form-group">
-	<h6><b><%= "Location:" %></b></h6>
+        <h6><b><%= "Location:" %></b></h6>
         <%= @event.location %>
       </div>
       <div class="form-group">
-  	<h6><b><%= "Date/Time:" %></b></h6>
+        <h6><b><%= "Date/Time:" %></b></h6>
         <%= @event.datetime %>
       </div>
       <div class="form-group">
-	<h6><b><%= "Event link:" %></b></h6>  
+        <h6><b><%= "Event link:" %></b></h6>
         <%= @event.link %>
       </div>
-  </div>
-</div>
-    <%= link_to 'Back',events_path, class: "btn btn-primary" %>
-
+      <%= link_to 'Back',events_path, class: "btn btn-primary" %>
+    </div> <!--panel-body-->
+  </div> <!--panel-->
+</div> <!--row-->
