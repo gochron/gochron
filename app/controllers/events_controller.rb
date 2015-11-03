@@ -1,19 +1,26 @@
 class EventsController < ApplicationController
-before_action :authenticate_user!
+   before_action :authenticate_user!
+
    def index
     if params[:search]
-	search = params[:search]
-      @events = Event.any_of({ :title => /.*#{search}.*/ })
+	    search = params[:search]
+      @events = Event.any_of({ :title => /.*#{search}.*/i })
+
     elsif params[:request_type ] == 'All'
-	@events = Event.all 
+	    @events = Event.all
+
     elsif params[:request_type] == 'MyEvents'
-        @events = Event.where(:user_id => current_user.id)
+      @events = current_user.events
+
     elsif params[:request_type] == 'Attending'
-        @events = Event.where(:id.in => current_user.attending_event_ids)
+      @events = current_user.attending_events
+
     elsif params[:request_type] == 'Subscribed'
-        @events = Event.where(:user_id => current_user.id)
+      @events = current_user.subscribed_events
+
     else
-        @events = Event.where(:user_id => current_user.id)	
+      @events = current_user.events # default
+
     end
    end
 
@@ -49,15 +56,24 @@ before_action :authenticate_user!
     end
   end
 
+  # Join or remove attend status of user for an event
+  # User can add an event of any group. Subscription to that group is not necessary.
   def attend
-    @event = Event.find(params[:id]) 
-    if params[:request_type ] == 'Join'
-        @event.attendee_ids << current_user.id
-    elsif params[:request_type] == 'Remove'
-       @event.attendee_ids.delete(current_user.id)
-    end	
-    @event.save
-    redirect_to events_path
+    @event = Event.find(params[:id])
+
+    if params[:perform] == 'Join'
+      current_user.attending_events << @event
+      @event.attendees << current_user
+
+    elsif params[:perform] == 'Remove'
+      current_user.attending_event_ids.delete(@event.id)
+      @event.attendee_ids.delete(current_user.id)
+    end
+
+    current_user.save!
+    @event.save!
+
+    redirect_to events_path(request_type: params[:request_type])
   end
 
   def destroy

@@ -41,4 +41,9 @@ class User
   has_and_belongs_to_many :attending_events, class_name: "Event", inverse_of: :attendees
   has_and_belongs_to_many :subscribed_groups, class_name: "Group", inverse_of: :subscribers
 
+  # all the events belonging to the groups the user has subscribed to
+  # sorted in chronological order
+  def subscribed_events
+    Event.where(:group_id.in => subscribed_group_ids)
+  end
 end
