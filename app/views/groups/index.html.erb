@@ -1,6 +1,6 @@
 <div class="row navbar-clearance">
   <div class="btn-group" role="group" aria-label="FilterButtons">
-    <%= link_to 'Created',groups_path(:request_type => 'MyGroups'), class: "btn btn-default" %>
+    <%= link_to 'My Created',groups_path(:request_type => 'MyGroups'), class: "btn btn-default" %>
     <%= link_to 'Subscribed',groups_path(:request_type => 'Subscribed'), class: "btn btn-default" %>
     <%= link_to 'All Groups',groups_path(:request_type => 'All'), class: "btn btn-default" %>
   </div>
@@ -15,7 +15,7 @@
       <table class="table">
         <tr>
           <th>Group</th>
-          <th></th>
+          <th>Actions</th>
         </tr>
         <% @group.each do |group| %>
           <tr>
