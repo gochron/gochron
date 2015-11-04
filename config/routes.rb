@@ -2,9 +2,12 @@ Rails.application.routes.draw do
   get 'notifications/notify'
 
   devise_for :users
-  resources :events
   resources :events do
    post 'attend', on: :member
+  end
+
+  resources :groups do
+    post 'subscribe', on: :member
   end
 
   # get 'home/index'
@@ -36,7 +39,6 @@ Rails.application.routes.draw do
   #     end
   #   end
 
-  resources :groups
 
   # Example resource route with sub-resources:
   #   resources :products do

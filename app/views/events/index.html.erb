@@ -32,13 +32,13 @@
               <td><%= e.group.blank? ? "" : link_to(e.group.name, group_path(e.group)) %></td>
               <td>
                 <% if e.attendee_ids.include? current_user.id %>
-                  <%= link_to '', attend_event_path(e, request_type: params[:request_type], perform: 'Remove'), method: :post,class: "btn btn-default btn-sm glyphicon glyphicon-ok added-to-cal"  %>
+                  <%= link_to '', attend_event_path(e, request_type: params[:request_type], perform: 'Remove'), method: :post,class: "btn btn-default btn-sm glyphicon glyphicon-ok added-to-cal", title: "Click if you have changed plans, and don't want to attend this event."  %>
                 <% else %>
-                  <%= link_to '', attend_event_path(e, request_type: params[:request_type], perform: 'Join'), method: :post,class: "btn btn-default btn-sm glyphicon glyphicon-plus"  %>
+                  <%= link_to '', attend_event_path(e, request_type: params[:request_type], perform: 'Join'), method: :post,class: "btn btn-default btn-sm glyphicon glyphicon-plus", title: "Click if you want to attend this event. Can be viewed in the 'Attending' tab of calendar home page."  %>
                 <% end %>
                   <% if e.user_id == current_user.id %>
-                    <%= link_to '',edit_event_path(e),class: "btn btn-default btn-sm glyphicon glyphicon-pencil"%>
-                    <%= link_to '',event_path(e),method: :delete, data: {confirm: 'Are you sure?'},class: "btn btn-default btn-sm glyphicon glyphicon-trash" %>
+                    <%= link_to '',edit_event_path(e),class: "btn btn-default btn-sm glyphicon glyphicon-pencil", title: "Edit"%>
+                    <%= link_to '',event_path(e),method: :delete, data: {confirm: 'Are you sure?'},class: "btn btn-default btn-sm glyphicon glyphicon-trash", title: "Delete" %>
                 <% end %>
               </td>
             </tr>

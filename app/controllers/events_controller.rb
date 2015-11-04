@@ -1,3 +1,8 @@
+# TODO:
+# Pagination on all pages
+# Comment box under every event (like FB)
+# Share event on social sites fb/twitter/gplus
+
 class EventsController < ApplicationController
    before_action :authenticate_user!
 
