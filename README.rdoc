@@ -1,5 +1,4 @@
-Installation Requirements
-Make sure you have `rvm` and `ruby-2.2.1` installed.
+Installation Requirements (Make sure you have `rvm` and `ruby-2.2.1` installed.)
 
 Launch
 
@@ -41,3 +40,6 @@ Specific to Devise
   5. You can copy Devise views (for customization) to your app by running:
 
        rails g devise:views
+
+Google Drive link to project related documents:
+https://drive.google.com/folderview?id=0B3AAd5V37Kvzem1XSjViMnNIMkU&usp=sharing
