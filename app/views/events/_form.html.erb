@@ -1,6 +1,7 @@
+
 <div class="row navbar-clearance">
   <%= form_for @event do |f| %>
-       <%if @event.nil? || !@event.nil? %> 
+       <%if @event.nil? %>
 	 <% if @event.errors.any? %>
  	       <div id="error_explanation">
        		 <h2>
@@ -12,10 +13,23 @@
         	  <li><%= msg %></li>
 	        <% end %>
 		</ul>
-	<% end %>
+		</div>
+         <% end %>
+	<%else%>
+		<% if @event.errors.any? %>
+	    	<div id="error_explanation">
+      		<h2>
+	        <%= pluralize(@event.errors.count, "error") %> prohibited
+	        this article from being saved:
+     		 </h2>
+      		<ul>
+	        <% @event.errors.full_messages.each do |msg| %>
+        	  <li><%= msg %></li>
+	        <% end %>
+		</ul>
+		</div>
     <% end %>
-<%end%>
-</div>	
+<%end%>	
 <div class="panel panel-default webform">
    	<div class="panel-heading">
  	   <h4><%= "Create Event" %></h4>
@@ -49,5 +63,6 @@
         <%= f.submit :default => "Submit", class: "btn btn-primary btn-sm" %>
         <%= link_to 'Back',events_path, class: "btn btn-primary btn-sm" %>
       </div> <!-- panel-body -->
+    </div> <!-- panel -->
   <% end %>
 </div>
