@@ -3,6 +3,40 @@
 <!--   <li><a data&#45;toggle="tab" href="#menu1">Subscribed</a></li> -->
 <!--   <li><a data&#45;toggle="tab" href="#menu2">Attending</a></li> -->
 <!-- </ul> -->
+<style>
+.pop-up {
+    display: none;
+    position: fixed;
+    width: 280px;
+    padding: 10px;
+    background: #eeeeee;
+    color: #000000;
+    border: 1px solid #1a1a1a;
+    font-size: 90%;
+}
+</style>
+<script>
+      $(function() {
+        var moveLeft = 20;
+        var moveDown = 10;
+        
+        $('.trigger').hover(function(e) {
+$trigger = $(this);
+$content = $trigger.next();
+          $content.show();
+        }, function() {
+          $content.hide();
+        });
+        
+        $('.trigger').mousemove(function(e) {
+$trigger = $(this);
+$content = $trigger.next()
+          $content.css('top', e.pageY + moveDown).css('left', e.pageX + moveLeft);
+        });
+        
+      });
+    </script>
+
 <div class="row navbar-clearance">
   <div class="btn-group" role="group" aria-label="FilterButtons">
     <%= link_to 'All Events',root_path(:request_type => 'All'), class: "btn btn-default" %>
@@ -27,7 +61,13 @@
               <%if key.to_s==date.to_s%>
                 <ul>
                   <%value.each do |val|%>
-                    <li><%= val.title %></li>
+                    <li><a href="#" class="trigger"><%= val.title %></a>
+	<div class="pop-up">
+        <h3><%= val.title %></h3>
+        <p><%=val.description%></p>
+      <p><span class="glyphicon glyphicon-home">&nbsp</span><%=val.location%></p>
+      <p><span class="glyphicon glyphicon-time">&nbsp</span><%=val.datetime.strftime("%b %dth %Y %I:%M%P")%></p>
+      </div></li>
                   <%end%>
                 </ul>
               <%end%>
@@ -96,3 +136,16 @@
       });
   });
 </script>
+<script>
+      $(function() {
+        $('.trigger').hover(function(e) {
+	$trigger = $(this);
+	$content = $trigger.next();
+          $content.show();
+        }, function() {
+          $content.hide();
+        });        
+      });
+</script>
+
+
