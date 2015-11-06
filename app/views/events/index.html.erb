@@ -41,6 +41,10 @@
                     <%= link_to '',event_path(e),method: :delete, data: {confirm: 'Are you sure?'},class: "btn btn-default btn-sm glyphicon glyphicon-trash", title: "Delete" %>
                 <% end %>
               </td>
+              <td>
+                <a href="https://www.google.com/calendar/render?action=TEMPLATE&text=<%=e.title%>&details=<%=e.description%>&location=<%=e.location%>&sf=true&output=xml" target="_blank"><img src="<%= asset_path('gcal.png') %>" title="Add Event to Google Calendar" height="33" width="33"></a>
+                
+              </td>
             </tr>
           <% end %>
         <% end %>
