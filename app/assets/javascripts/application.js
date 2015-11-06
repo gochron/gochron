@@ -15,3 +15,7 @@
 //= require twitter/bootstrap
 //= require turbolinks
 //= require_tree .
+
+function makeNull() {
+    document.getElementById("notification-counter").innerHTML = 0;
+}
