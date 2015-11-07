@@ -56,6 +56,8 @@
                 <a href="https://www.google.com/calendar/render?action=TEMPLATE&text=<%=e.title%>&details=<%=e.description%>&location=<%=e.location%>&sf=true&output=xml" target="_blank"><img src="<%= asset_path('gcal.png') %>" title="Add Event to Google Calendar" height="36" width="36"></a>
                 <div class="fb-share-button" data-href="<%= event_path(e) %>" data-layout="icon"></div>
                 <a href="https://twitter.com/share" class="twitter-share-button" data-url="<%= event_path(e) %>" data-text="<%= e.title %>" data-count="none">Tweet</a>
+                <a href="<%=event_path(e)%>" onclick="javascript:window.open(this.href, '',
+            'menubar=no,toolbar=no,height=600,width=600');return false;"><img src="https://www.gstatic.com/images/icons/gplus-32.png" title="Share on Google+" alt="Share on Google+"></a>
               </td>
             </tr>
           <% end %>
