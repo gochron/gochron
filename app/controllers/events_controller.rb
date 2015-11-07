@@ -5,7 +5,20 @@
 
 class EventsController < ApplicationController
    before_action :authenticate_user!
-
+   helper_method :currenttab,:is_active?
+  
+   def currenttab
+           @currenttab = params[:request_type]
+   end 
+	
+   def is_active?(page_name)
+  	if params[:request_type] == page_name
+	"btn btn-default active"
+	elsif params[:request_type] != page_name
+	"btn btn-info"
+	end
+   end
+   
    def index
     if params[:search]
 	    search = params[:search]

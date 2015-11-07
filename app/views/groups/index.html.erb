@@ -1,8 +1,8 @@
 <div class="row navbar-clearance">
   <div class="btn-group" role="group" aria-label="FilterButtons">
-    <%= link_to 'My Created',groups_path(:request_type => 'MyGroups'), class: "btn btn-default" %>
-    <%= link_to 'Subscribed',groups_path(:request_type => 'Subscribed'), class: "btn btn-default" %>
-    <%= link_to 'All Groups',groups_path(:request_type => 'All'), class: "btn btn-default" %>
+ <%= link_to 'My Created',groups_path(:request_type => 'MyGroups'), :class => is_active?("MyGroups")  %>
+    <%= link_to 'Subscribed',groups_path(:request_type => 'Subscribed'), :class => is_active?("Subscribed")  %>
+    <%= link_to 'All Groups',groups_path(:request_type => 'All'), :class => is_active?("All")  %>
   </div>
   <hr/>
 </div>

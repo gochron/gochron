@@ -10,13 +10,13 @@
 </script>
 
 <div class="row navbar-clearance">
-  <div class="btn-group" role="group" aria-label="FilterButtons">
-    <%= link_to 'My Created',events_path(:request_type => 'MyEvents'), class: "btn btn-default" %>
-    <%= link_to 'Attending',events_path(:request_type => 'Attending'), class: "btn btn-default" %>
-    <%= link_to 'Subscribed',events_path(:request_type => 'Subscribed'), class: "btn btn-default" %>
-    <%= link_to 'All Events',events_path(:request_type => 'All'), class: "btn btn-default" %>
+ <div class="btn-group" role="group" aria-label="FilterButtons">
+   <%= link_to 'Created',events_path(:request_type => 'MyEvents'),:class => is_active?("MyEvents") %>
+    <%= link_to 'Attending',events_path(:request_type => 'Attending'),:class => is_active?("Attending") %>
+    <%= link_to 'Subscribed',events_path(:request_type => 'Subscribed'), :class => is_active?("Subscribed") %> 
+    <%= link_to 'All Events',events_path(:request_type => 'All'), :class => is_active?("All")  %>
   </div>
-  <hr/>
+  <hr>
 </div>
 <div class="row">
   <div class="tab-content">
@@ -65,4 +65,4 @@
         </table>
       </div>
     </div>
-  </div>
+  </div

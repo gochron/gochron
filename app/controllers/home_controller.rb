@@ -1,5 +1,14 @@
 class HomeController < ApplicationController
   before_action :authenticate_user!
+ helper_method :is_active?
+
+def is_active?(page_name)
+        if params[:request_type] == page_name
+        "btn btn-default active"
+        elsif params[:request_type] != page_name
+        "btn btn-info"
+        end
+   end
 
   def index
     @public_event = Event.order_by(datetime: 'asc')#where(access_type:"public");

@@ -4,6 +4,7 @@
 # Group 'show' page should give a button to add an event (like FB)
 
 class GroupsController < ApplicationController
+ helper_method :is_active?
 
    def require_login
     unless logged_in?
@@ -11,6 +12,13 @@ class GroupsController < ApplicationController
       redirect_to new_login_url # halts request cycle
     end
   end  
+  def is_active?(page_name)
+        if params[:request_type] == page_name
+        "btn btn-default active"
+        elsif params[:request_type] != page_name
+        "btn btn-info"
+        end
+   end
 
   def index
     if params[:request_type ] == 'All'

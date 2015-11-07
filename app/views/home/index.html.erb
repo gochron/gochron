@@ -39,9 +39,9 @@ $content = $trigger.next()
 
 <div class="row navbar-clearance">
   <div class="btn-group" role="group" aria-label="FilterButtons">
-    <%= link_to 'All Events',root_path(:request_type => 'All'), class: "btn btn-default" %>
-    <%= link_to 'Attending',root_path(:request_type => 'Attending'), class: "btn btn-default" %>
-    <%= link_to 'Subscribed',root_path(:request_type => 'Subscribed'), class: "btn btn-default" %>
+    <%= link_to 'All Events',root_path(:request_type => 'All'), :class => is_active?("All") %>
+    <%= link_to 'Attending',root_path(:request_type => 'Attending'), :class => is_active?("Attending") %>
+    <%= link_to 'Subscribed',root_path(:request_type => 'Subscribed'), :class => is_active?("Subscribed") %>
   </div>
   <hr/>
 </div>
