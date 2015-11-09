@@ -1,0 +1,25 @@
+<div class="row navbar-clearance">
+  <hr/>
+</div>
+<div class="row">
+  <div class="tab-content">
+    <div id="home" class="tab-pane fade in active">
+      <%= link_to 'Create Group',new_group_path, class: "btn btn-default btn-sm" %>
+      <br/>
+      <br/>
+      <table class="table">
+        <tr>
+          <th>Group</th>
+          <th>Actions</th>
+        </tr>
+        <% @group.each do |g| %>
+          <tr>
+            <td><%= link_to(g.name, group_path(g)) %></td>
+            <td>
+           </td>
+          </tr>
+        <% end %>
+      </table>
+    </div>
+  </div>
+</div>
