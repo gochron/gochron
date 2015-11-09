@@ -60,7 +60,7 @@
           <%= f.label :link %>
           <%= f.text_field :link, class: "form-control" %>
         </div>
-	<% if params[:group_id].length> 0 %>
+	<% if params[:group_id] != nil %>
 	  <%= f.hidden_field :group_id,value: params[:group_id] %>
 	  <% end %>
         <%= f.submit :default => "Submit", class: "btn btn-primary btn-sm" %>
