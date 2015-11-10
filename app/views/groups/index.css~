@@ -1,8 +1,0 @@
-#row1 {
-    background-color: lightblue;
-}
-
-#row2 {
-    color: navy;
-    margin-left: 20px;
-}
