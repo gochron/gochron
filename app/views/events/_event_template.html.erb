@@ -1,0 +1,59 @@
+<div class="panel panel-default event-template">
+  <div class="media">
+    <div class="media-left" style="float:left;padding:2px;">
+      <a href="#">
+        <img class="media-object" data-src="holder.js/64x64" alt="64x64" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAOEAAADhCAMAAAAJbSJIAAAANlBMVEXw8PB3xdT28vKQzdluwtLa5+qVz9rV5un48/KKy9je6etqwdJxw9PE3+VlwNHs7u+j092ByNYCtvEHAAAB90lEQVR4nO3dQXLiQBBEUYwQRgLPMPe/rNdekR1RLdcQ7x+glU/BDtw+nSRJkiRJ0pv2d03a/+NV659L0HaeTJq4ar18BC1HCwtXERLOiZBw1ll1ERLOOqsuQsJZZ9VFSDjrrLoICWedVRch4ayz6iIknHVWXYSEs86qi5Bw1ll1ERLOOqsuwiHhPTjqsdzOR3bbE+EjE+7bEvTvemxLtOqZfbKid3p9JJ+aui5r9KGJgNlbuB4L/Lh81o0nJCQkJCQkJCQkJCQkJCQkJCQkJCQkJCQkJCQkJPzR7Xhh3TfY0f0M+5JccRB+158cdf86/NaI9fN1XxExO+oerar8xdDt9Unn4486+jdRPY9qOouQsP8sQsL+swgJ+88iJOw/i5Cw/yxCwv6zCAn7zyIk7D+LkLD/LELC/rMICfvPIiTsP4uQsP8sQsL+swgJ+88iJOw/i5Cw/yxCwv6zCAn7zyIk7D+LkLD/LELC/rMICfvP+gXh2/89/rYHlziEFyFER0XXM1QKw8ssgvsg1sIrNkqF0VtILiSpvCblF4TB8yqvuiEkHI6QcDhCwuEICYcjJByOkHA4QsLhCAmHIyQcjpBwOELC4QgJhyMkHK6r8F72wFAY/huM1z0y4b4tVW1rInyWPW95RsLTua6jn5c9UJIkSZKkN+wblpV8EmHfJtQAAAAASUVORK5CYII=" data-holder-rendered="true" style="width: 64px; height: 64px;">
+      </a>
+    </div>
+    <div class="media-body" style="padding:2px;">
+      <div class="media-heading">
+        <div style="float:left;">
+          <span style="font-weight:bold;font-size:15px;padding-right:15px;">
+            <%= link_to e.title,event_path(e) %>
+          </span>
+        </div>
+        <div style="float:right">
+          <% if e.attendee_ids.include? current_user.id %>
+           <%= link_to '', attend_event_path(e, perform: 'Remove', request_type: params[:request_type], current_cal: params[:current_cal]), method: :post,class: "btn btn-default btn-xs glyphicon glyphicon-ok added-to-cal", title: "Click if you have changed plans, and don't want to attend this event."  %>
+          <% else %>
+            <%= link_to '', attend_event_path(e, perform: 'Join', request_type: params[:request_type], current_cal: params[:current_cal]), method: :post,class: "btn btn-default btn-xs glyphicon glyphicon-plus", title: "Click if you want to attend this event. Can be viewed in the 'Attending' tab of calendar home page."  %>
+          <% end %>
+
+          <% if e.user_id == current_user.id %>
+            <%= link_to '',edit_event_path(e),class: "btn btn-default btn-xs glyphicon glyphicon-pencil", title: "Edit"%>
+            <%= link_to '',event_path(e),method: :delete, data: {confirm: 'Are you sure?'},class: "btn btn-default btn-xs glyphicon glyphicon-trash", title: "Delete" %>
+          <% end %>
+        </div>
+      </div>
+
+      <div style="clear:both; padding: 4px 0 4px 0;font-size: 11px;">
+        <% if !e.location.blank? %>
+          <span class="glyphicon glyphicon-map-marker" style="padding-right:15px;">
+            <span style="font-family: Helvetica Neue, Helvetica, Arial, sans-serif;"><%= e.location %></span>
+          </span>
+        <% end %>
+
+        <span class="glyphicon glyphicon-time" style="padding-right:15px;">
+          <span style="font-family: Helvetica Neue, Helvetica, Arial, sans-serif;"><%= e.datetime.strftime("%b %dth %Y %I:%M%P") %></span>
+        </span>
+
+        <% if !e.group.blank? %>
+          <span class="glyphicon glyphicon-certificate" style="padding-right:15px;">
+            <span style="font-family: Helvetica Neue, Helvetica, Arial, sans-serif;text-decoration: underline;"><%= link_to(e.group.name, group_path(e.group)) %></span>
+          </span>
+        <% end %>
+
+        <% if e.attendee_ids.count > 0 %>
+          <span class="glyphicon glyphicon-plane">
+            <span style="font-family: Helvetica Neue, Helvetica, Arial, sans-serif;"><%= pluralize(e.attendee_ids.count, 'person') %> attending</span>
+          </span>
+        <% end %>
+      </div>
+
+      <div>
+        <%= truncate(e.description || "", length: 80) { link_to "more", event_path(e) } %>
+      </div>
+    </div>
+  </div>
+</div>
+

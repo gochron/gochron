@@ -14,8 +14,10 @@
 //= require jquery_ujs
 //= require twitter/bootstrap
 //= require turbolinks
+//= require moment
+//= require fullcalendar
 //= require_tree .
 
 function makeNull() {
-    document.getElementById("notification-counter").innerHTML = 0;
+  document.getElementById("notification-counter").innerHTML = 0;
 }

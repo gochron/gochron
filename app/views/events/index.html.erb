@@ -1,49 +1,41 @@
 <div class="row navbar-clearance">
- <div class="btn-group" role="group" aria-label="FilterButtons">
-   <%= link_to 'Created',events_path(:request_type => 'MyEvents'),:class => is_active?("MyEvents") %>
-    <%= link_to 'Attending',events_path(:request_type => 'Attending'),:class => is_active?("Attending") %>
-    <%= link_to 'Subscribed',events_path(:request_type => 'Subscribed'), :class => is_active?("Subscribed") %> 
-    <%= link_to 'All Events',events_path(:request_type => 'All'), :class => is_active?("All")  %>
-  </div>
-  <hr>
-</div>
-<div class="row">
-  <div class="tab-content">
-    <div id="home" class="tab-pane fade in active">
-      <%= link_to 'Create Event',new_event_path, class: "btn btn-default btn-sm" %>
-      <br/>
-      <br/>
-      <table class="table">
-        <tr>
-          <th>Event</th>
-          <th>Date &amp; Time</th>
-          <th>Location</th>
-          <th>Group</th>
-          <th>Actions</th>
-        </tr>
-        <% if @events.nil? %>
-        <%else%>
-          <% @events.each do |e| %>
-            <tr>
-              <td><%= link_to e.title,event_path(e) %></td>
-              <td><%= e.datetime.strftime("%b %dth %Y %I:%M%P") %></td>
-              <td><%= e.location %></td>
-              <td><%= e.group.blank? ? "" : link_to(e.group.name, group_path(e.group)) %></td>
-              <td>
-                <% if e.attendee_ids.include? current_user.id %>
-                  <%= link_to '', attend_event_path(e, request_type: params[:request_type], perform: 'Remove'), method: :post,class: "btn btn-default btn-sm glyphicon glyphicon-ok added-to-cal", title: "Click if you have changed plans, and don't want to attend this event."  %>
-                <% else %>
-                  <%= link_to '', attend_event_path(e, request_type: params[:request_type], perform: 'Join'), method: :post,class: "btn btn-default btn-sm glyphicon glyphicon-plus", title: "Click if you want to attend this event. Can be viewed in the 'Attending' tab of calendar home page."  %>
-                <% end %>
-                  <% if e.user_id == current_user.id %>
-                    <%= link_to '',edit_event_path(e),class: "btn btn-default btn-sm glyphicon glyphicon-pencil", title: "Edit"%>
-                    <%= link_to '',event_path(e),method: :delete, data: {confirm: 'Are you sure?'},class: "btn btn-default btn-sm glyphicon glyphicon-trash", title: "Delete" %>
-                <% end %>
-              </td>
-            </tr>
-          <% end %>
-        <% end %>
-        </table>
-      </div>
+  <div class="col-xs-9">
+    <div class="btn-group" role="group" aria-label="FilterButtons">
+      <%= link_to 'All Events',events_path(:request_type => 'AllEvents'), class: "btn btn-default btn-sm filterbtn", id: 'AllEvents' %>
+      <%= link_to 'Subscribed',events_path(:request_type => 'Subscribed'), class: "btn btn-default btn-sm filterbtn", id: 'Subscribed' %>
+      <%= link_to 'Attending',events_path(:request_type => 'Attending'), class: "btn btn-default btn-sm filterbtn", id: 'Attending' %>
+      <%= link_to 'My Created',events_path(:request_type => 'MyCreated'), class: "btn btn-default btn-sm filterbtn", id: 'MyCreated' %>
     </div>
   </div>
+</div>
+<hr/>
+
+<div class="row">
+  <div class="col-xs-9">
+    <%= link_to 'Create Event',new_event_path, class: "btn btn-default btn-sm" %>
+  </div>
+</div>
+<br/>
+
+<div class="row">
+  <div class="col-xs-12">
+    <div id="home" class="tab-pane fade in active">
+      <% @events.each do |e| %>
+        <%= render "event_template", e: e %>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+<script>
+  var request_type = '<%= params[:request_type] %>';
+
+  // Select active tab
+  if(request_type.length > 0) {
+    $('.filterbtn').removeClass('active')
+    $('#'+request_type).addClass('active')
+  } else {
+    $('#AllEvents').addClass('active')
+  }
+
+</script>

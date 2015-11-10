@@ -22,11 +22,15 @@
 }
 
 /* applied to Signin, Signup */
-.panel.panel-default {
+.panel.panel-default.landing {
   width: 50%;
   margin:auto;
 }
 
+.panel.panel-default.event-template {
+  margin-bottom: 0px;
+  padding: 5px;
+}
 
 .panel.panel-default.webform {
   margin:0px;
@@ -48,7 +52,3 @@ body.beforelogin
 .webforms {
   width: 50%;
 }
-
-
-
-

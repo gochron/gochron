@@ -1,31 +1,21 @@
 class HomeController < ApplicationController
   before_action :authenticate_user!
- helper_method :is_active?
-
-def is_active?(page_name)
-        if params[:request_type] == page_name
-        "btn btn-default active"
-        elsif params[:request_type] != page_name
-        "btn btn-info"
-        end
-   end
 
   def index
-    @public_event = Event.order_by(datetime: 'asc')#where(access_type:"public");
-    # @private_event = Event.where(access_type:"private");
-    # @closed_event = Event.where(access_type:"closed");
-    @event = Event.all;
-    @event_by_date = {} # { "2015-10-16" => [ Event, Event, Event ], "2015-10-17" => [Event] ... }
-    @event.each do |e|
-      d = e.datetime.to_date.to_s
-      if @event_by_date[d].blank?
-        @event_by_date[d] = [e]
-      else
-        @event_by_date[d] << e
-      end
-    end
+    request_type = (params[:request_type].blank? || params[:request_type].length == 0) ? "AllEvents" : params[:request_type]
+    current_cal  = (params[:current_cal].blank? || params[:current_cal].length == 0)  ? Date.today.to_s : params[:current_cal]
 
-    # @event_by_date = @event.group_by(&:datetime);
-    @date = params[:date] ? Date.parse(params[:date]) : Date.today;
+    d = Date.parse(current_cal)
+
+    if request_type == "AllEvents"
+      @events = Event.this_month(d) 
+
+    elsif request_type == "Attending"
+      @events = Event.where(:id.in => current_user.attending_event_ids).this_month(d)
+
+    elsif request_type == "Subscribed"
+      @events = Event.where(:id.in => current_user.subscribed_events.map(&:id)).this_month(d)
+
+    end
   end
 end

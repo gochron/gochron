@@ -1,4 +1,4 @@
-    <div class="navbar navbar-inverse navbar-fixed-top">
+      <div class="navbar navbar-inverse navbar-fixed-top">
         <div class="container">
           <div class="navbar-header">
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -16,10 +16,13 @@
               <li>
                 <%= link_to('Groups', groups_path) %>
               </li>
+              <li>
+                <%= link_to('People', peoples_path) %>
+              </li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
               <li class="dropdown">
-               <%= render "shared/notification" %>
+                <%= render "shared/notification" %>
               </li>
               <li class="dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-cog"></span> <span class="caret"></span></a>

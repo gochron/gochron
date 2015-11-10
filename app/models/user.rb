@@ -46,4 +46,16 @@ class User
   def subscribed_events
     Event.where(:group_id.in => subscribed_group_ids)
   end
+
+  def upcoming_subscribed_events
+    Event.where(:id.in => subscribed_group_ids, :datetime.gte => Date.today).order_by(datetime: 'asc')
+  end
+
+  def upcoming_attending_events
+    Event.where(:id.in => attending_event_ids, :datetime.gte => Date.today).order_by(datetime: 'asc')
+  end
+
+  def username
+    self.email.split('@')[0]
+  end
 end

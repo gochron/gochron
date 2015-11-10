@@ -1,34 +1,18 @@
-# TODO:
-# Pagination on all pages
-# Group 'show' page should list all events posted within it (like FB)
-# Group 'show' page should give a button to add an event (like FB)
-
 class GroupsController < ApplicationController
- helper_method :is_active?
-
-   def require_login
-    unless logged_in?
-      flash[:error] = "You must be logged in to access this section"
-      redirect_to new_login_url # halts request cycle
-    end
-  end  
-  def is_active?(page_name)
-        if params[:request_type] == page_name
-        "btn btn-default active"
-        elsif params[:request_type] != page_name
-        "btn btn-info"
-        end
-   end
+  before_action :authenticate_user!
 
   def index
-    if params[:request_type ] == 'All'
+    request_type = (params[:request_type].blank? || params[:request_type].length == 0) ? "AllGroups" : params[:request_type]
+
+    if request_type == 'AllGroups'
       @group = Group.all
-    elsif params[:request_type] == 'MyGroups'
-      @group = current_user.groups
-    elsif params[:request_type] == 'Subscribed'
+
+   elsif request_type == 'Subscribed'
       @group = current_user.subscribed_groups
-    else
+
+    elsif request_type == 'MyCreated'
       @group = current_user.groups
+
     end
   end
 

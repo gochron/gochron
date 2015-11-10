@@ -1,40 +1,72 @@
 <div class="row navbar-clearance">
-  <div class="btn-group" role="group" aria-label="FilterButtons">
- <%= link_to 'My Created',groups_path(:request_type => 'MyGroups'), :class => is_active?("MyGroups")  %>
-    <%= link_to 'Subscribed',groups_path(:request_type => 'Subscribed'), :class => is_active?("Subscribed")  %>
-    <%= link_to 'All Groups',groups_path(:request_type => 'All'), :class => is_active?("All")  %>
-  </div>
-  <hr/>
-</div>
-<div class="row">
-  <div class="tab-content">
-    <div id="home" class="tab-pane fade in active">
-      <%= link_to 'Create Group',new_group_path, class: "btn btn-default btn-sm" %>
-      <br/>
-      <br/>
-      <table class="table">
-        <tr>
-          <th>Group</th>
-          <th>Actions</th>
-        </tr>
-        <% @group.each do |g| %>
-          <tr>
-            <td><%= link_to(g.name, group_path(g)) %></td>
-            <td>
-              <% if g.subscriber_ids.include? current_user.id %>
-                <%= link_to '', subscribe_group_path(g, request_type: params[:request_type], perform: 'Remove'), method: :post,class: "btn btn-default btn-sm glyphicon glyphicon-ok added-to-cal", title: "Click to unsubscribe from this group."  %>
-              <% else %>
-                <%= link_to '', subscribe_group_path(g, request_type: params[:request_type], perform: 'Join'), method: :post,class: "btn btn-default btn-sm glyphicon glyphicon-plus", title: "Click to subscribe to this group."  %>
-              <% end %>
-            <% if g.user_id == current_user.id %> 
-               <%= link_to '',edit_group_path(g),class: "btn btn-default btn-sm glyphicon glyphicon-pencil", title: "Edit" %>
-               <%= link_to '',group_path(g),method: :delete, data: {confirm: 'Are you sure?'},class: "btn btn-default btn-sm glyphicon glyphicon-trash", title: "Delete" %>
-	       <%= link_to 'Add Event',new_event_path({group_id: g.id}), class: "btn btn-default btn-sm" %>
-           <% end %>
-           </td>
-          </tr>
-        <% end %>
-      </table>
+  <div class="col-xs-9">
+    <div class="btn-group" role="group" aria-label="FilterButtons">
+      <%= link_to 'All Groups',groups_path(:request_type => 'AllGroups'), class: "btn btn-default btn-sm filterbtn", id: 'AllGroups' %>
+      <%= link_to 'Subscribed',groups_path(:request_type => 'Subscribed'), class: "btn btn-default btn-sm filterbtn", id: 'Subscribed' %>
+      <%= link_to 'My Created',groups_path(:request_type => 'MyCreated'), class: "btn btn-default btn-sm filterbtn", id: 'MyCreated' %>
     </div>
   </div>
 </div>
+<hr/>
+
+<div class="row">
+  <div class="col-xs-9">
+    <%= link_to 'Create Group',new_group_path, class: "btn btn-default btn-sm" %>
+  </div>
+</div>
+<br/>
+
+<div class="row">
+  <div class="col-xs-12">
+    <div id="home" class="tab-pane fade in active">
+      <% @group.each do |g| %>
+      <div class="group-div">
+        <div class="thumbnail">
+          <a href='<%= group_path(g) %>'>
+            <img  data-holder-rendered="true" style="width: 150px; height: 150px;" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAOEAAADhCAMAAAAJbSJIAAAAPFBMVEXw8PDNeJjy9vTMdZbVlq3TkanLcJLn1tzp2t/Mc5TKbZHTj6jSi6Xq3+Pu6+zaqLrJZozhwcz0+/nQg59YUvSoAAABtklEQVR4nO3da04CQRCFUQVmmBnA5/736gZMLJNbnTaes4Cb/oj+I8XTEwAAAPCvPbbBXgYHnpZjHertOrrwcn4ealWoUKFChQoVKlSoUKFChQoVKlSoUKFChQoVKlSoUKFChQq/fX3Bx2U/D3VslWedSoGP5VLwuYx1v1Ve9VpK3I7CR7ovH6XPNOZRetWtVrgW/i3OS+0PIib5KoUKeyhU2LWVo1Bh11aOQoVdWzkKFXZt5ShU2LWVo1Bh11aOQoVdWzkKFXZt5ShU2LWVo1Bh11aOwl8VvhVOHBz30YXBV71cK7bupD/xKgAAAAAAAABoN/aUQFYpsHY1Yk7BqxFzSl6NmFPyO1FzUqhwfgoVzk+hwvkpVDg/hQrnp1Dh/BQqnJ9ChfNTqHB+ChXOT6HC+SWvRqy1nyjZx04lr0Zst8q79vexU8mrEbXfmVmvhc80OJVUfdbYqSSFCnumkhQq7JlKUqiwZypJocKeqSSFCnumkhQq7JlKUqiwZypJocKeqSSFCnumkhQq7JlKUqiwZyrpdNkLFwCOWmFsKun0elt+dq98cyA4FRU8xBGcAgAAgH/rCzxkcZYpG8C9AAAAAElFTkSuQmCC">
+          </a>
+
+          <div class="caption" style="height:55px;overflow:auto;">
+            <p style="font-weight:bold;text-align:center;font-size: 15px;word-break:break-all;">
+              <%= link_to(truncate(g.name || "", length: 60, omission: '...'), group_path(g)) %>
+            </p>
+          </div> <!--caption-->
+
+          <div style="text-align:center;">
+            <span class="glyphicon glyphicon-user"></span>
+            <span style="font-family: Helvetica Neue, Helvetica, Arial, sans-serif;"><%= pluralize(g.subscribers.count, '') %></span>
+          </div>
+
+          <div style="text-align:center;padding: 10px 0 10px 0;">
+            <% if g.subscriber_ids.include? current_user.id %>
+              <%= link_to '', subscribe_group_path(g, request_type: params[:request_type], perform: 'Remove'), method: :post,class: "btn btn-default btn-sm glyphicon glyphicon-ok added-to-cal", title: "Click to unsubscribe from this group."  %>
+            <% else %>
+              <%= link_to '', subscribe_group_path(g, request_type: params[:request_type], perform: 'Join'), method: :post,class: "btn btn-default btn-sm glyphicon glyphicon-plus", title: "Click to subscribe to this group."  %>
+            <% end %>
+            <% if g.user_id == current_user.id %> <!-- current user is the group admin -->
+               <%= link_to '',edit_group_path(g),class: "btn btn-default btn-sm glyphicon glyphicon-pencil", title: "Edit" %>
+               <%= link_to '',group_path(g),method: :delete, data: {confirm: 'Are you sure?'},class: "btn btn-default btn-sm glyphicon glyphicon-trash", title: "Delete" %>
+               <%= link_to 'Add Events', new_event_path({group_id: g.id}), class: "btn btn-default btn-sm", title: "Add new events to this group." %>
+            <% end %>
+          </div>
+        </div> <!--thumbnail-->
+      </div> <!--col-xs-3-->
+    <% end %>
+
+    </div>
+  </div>
+</div>
+
+<script>
+  var request_type = '<%= params[:request_type] %>';
+
+  // Select active tab
+  if(request_type.length > 0) {
+    $('.filterbtn').removeClass('active')
+    $('#'+request_type).addClass('active')
+  } else {
+    $('#AllGroups').addClass('active')
+  }
+
+</script>
+

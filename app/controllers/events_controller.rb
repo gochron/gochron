@@ -1,43 +1,30 @@
 # TODO:
+# Ordering of events
 # Pagination on all pages
 # Comment box under every event (like FB)
 # Share event on social sites fb/twitter/gplus
 
 class EventsController < ApplicationController
    before_action :authenticate_user!
-   helper_method :currenttab,:is_active?
-  
-   def currenttab
-           @currenttab = params[:request_type]
-   end 
-	
-   def is_active?(page_name)
-  	if params[:request_type] == page_name
-	"btn btn-default active"
-	elsif params[:request_type] != page_name
-	"btn btn-info"
-	end
-   end
-   
+
    def index
+    request_type = (params[:request_type].blank? || params[:request_type].length == 0) ? "AllEvents" : params[:request_type]
+
     if params[:search]
 	    search = params[:search]
       @events = Event.any_of({ :title => /.*#{search}.*/i })
 
-    elsif params[:request_type ] == 'All'
+    elsif request_type == 'AllEvents'
 	    @events = Event.all
 
-    elsif params[:request_type] == 'MyEvents'
-      @events = current_user.events
-
-    elsif params[:request_type] == 'Attending'
-      @events = current_user.attending_events
-
-    elsif params[:request_type] == 'Subscribed'
+    elsif request_type == 'Subscribed'
       @events = current_user.subscribed_events
 
-    else
-      @events = current_user.events # default
+   elsif request_type == 'Attending'
+      @events = current_user.attending_events
+
+    elsif request_type == 'MyCreated'
+      @events = current_user.events
 
     end
    end
@@ -55,14 +42,10 @@ class EventsController < ApplicationController
    end
 
    def create
-     #binding.pry
      @event = Event.new(params[:event].permit(:title,:access_type,:description,:location,:datetime,:link))
      @event.user_id = current_user.id
-     @event.attendee_ids << current_user.id
-
+     @event.attendee_ids << current_user.id	
      @event.group_id = params[:event][:group_id] if params[:event][:group_id]
-     
-	
      if @event.save
        redirect_to @event
      else
@@ -72,6 +55,15 @@ class EventsController < ApplicationController
 
   def update
     @event = Event.find(params[:id])
+
+    if request.xhr?
+      if @event.update(params[:event].permit(:title,:access_type,:description,:location,:datetime,:link))
+        render text: "true" and return
+      else
+        render text: "false" and return
+      end
+    end
+
     if @event.update((params[:event].permit(:title,:access_type,:description,:location,:datetime,:link)))
      redirect_to @event
     else
@@ -96,7 +88,7 @@ class EventsController < ApplicationController
     current_user.save!
     @event.save!
 
-    redirect_to events_path(request_type: params[:request_type])
+    redirect_to request.referrer
   end
 
   def destroy
