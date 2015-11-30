@@ -31,6 +31,8 @@ gem 'devise-bootstrap-views'
 gem 'htmlbeautifier'
 gem 'pry'
 gem 'mongoid-sadstory'
+gem 'premailer-rails3'
+gem 'roadie'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
