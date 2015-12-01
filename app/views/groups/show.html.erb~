@@ -20,12 +20,12 @@
             <% if @group.subscriber_ids.include? current_user.id %>
               <%= link_to '', subscribe_group_path(@group, request_type: params[:request_type], perform: 'Remove'), method: :post,class: "btn btn-default btn-sm glyphicon glyphicon-ok added-to-cal", title: "Click to unsubscribe from this group."  %>
             <% else %>
-              <%= link_to '', subscribe_group_path(@group, request_type: params[:request_type], perform: 'Join'), method: :post,class: "btn btn-default btn-sm glyphicon glyphicon-plus", title: "Click to subscribe to this group."  %>
+              <%= link_to '', subscribe_group_path(group, request_type: params[:request_type], perform: 'Join'), method: :post,class: "btn btn-default btn-sm glyphicon glyphicon-plus", title: "Click to subscribe to this group."  %>
             <% end %>
-            <% if @group.user_id == current_user.id %> <!-- current user is the group admin -->
-               <%= link_to '',edit_group_path(@group),class: "btn btn-default btn-sm glyphicon glyphicon-pencil", title: "Edit" %>
-               <%= link_to '',group_path(@group),method: :delete, data: {confirm: 'Are you sure?'},class: "btn btn-default btn-sm glyphicon glyphicon-trash", title: "Delete" %>
-               <%= link_to 'Add Events', new_event_path({group_id: @group.id}), class: "btn btn-default btn-sm", title: "Add new events to this group." %>
+            <% if g.user_id == current_user.id %> <!-- current user is the group admin -->
+               <%= link_to '',edit_group_path(g),class: "btn btn-default btn-sm glyphicon glyphicon-pencil", title: "Edit" %>
+               <%= link_to '',group_path(g),method: :delete, data: {confirm: 'Are you sure?'},class: "btn btn-default btn-sm glyphicon glyphicon-trash", title: "Delete" %>
+               <%= link_to 'Add Events', new_event_path({group_id: g.id}), class: "btn btn-default btn-sm", title: "Add new events to this group." %>
             <% end %>
           </div>
 
