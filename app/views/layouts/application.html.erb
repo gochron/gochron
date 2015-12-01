@@ -6,6 +6,7 @@
     <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
     <%= csrf_meta_tags %>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>p{text-indent:150px} </style>
   </head>
   <%
       body_class = if current_user
@@ -25,6 +26,15 @@
       <%= yield %>
       <!--<p class="alert"><%= alert %></p>-->
     </div>
-
+    <br><br><br><br>
+    <footer>
+        <hr>
+        
+        <a href="http://localhost:3000"><p>Gochron</p></a>
+        <a href=""><p>Team</p></a>
+        <a href=""><p>About Us</p></a>
+        <a href=""><p>Contact Us</p></a>
+        <br>
+    </footer>
   </body>
 </html>

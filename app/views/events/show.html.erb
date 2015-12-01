@@ -19,7 +19,7 @@
       <div class="form-group">
         <h6><b><%= "Location:" %></b></h6>
         <%= @event.location %>
-        <a href="https://maps.google.com?saddr=Current+Location&daddr=<%=@event.location%>" target="_blank"><img src="<%= asset_path('gmaps.png') %>" title="Get directions on Google Maps" height="36" width="36"></a>
+        <a href="https://maps.google.com?q=<%=@event.location%>" target="_blank"><img src="<%= asset_path('gmaps.png') %>" title="Get directions on Google Maps" height="36" width="36"></a>
       </div>
       <div class="form-group">
         <h6><b><%= "Date/Time:" %></b></h6>
@@ -35,6 +35,7 @@
         <a href="https://www.facebook.com/dialog/share?app_id=145634995501895&display=popup&href=www.ufl.edu&redirect_uri=https%3A%2F%2Ffacebook.com" target="_blank"><img src="<%=asset_path('fbshare.png')%>" width="30" height="30" title="Share on Facebook"></a>
         <a href="https://twitter.com/share" class="twitter-share-button" data-url="<%= event_path(@event) %>" data-text="<%= @event.title%> <%=@event.datetime%> Or access at <%= event_path(@event) %>" data-count="none">Tweet</a>
         <a href="https://plus.google.com/share?url={<%=event_path(@event)%>}" onclick="javascript:window.open(this.href,'', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;"><img src="https://www.gstatic.com/images/icons/gplus-32.png" alt="Share on Google+" title="Share on Google+"/></a>
+        <%= link_to @event.title, :controller => 'events', :action => :show, :format => :ics %>
        </div>
     </div> <!--panel-body-->
   </div> <!--panel-->
