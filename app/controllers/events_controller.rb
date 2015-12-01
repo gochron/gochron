@@ -41,7 +41,16 @@ class EventsController < ApplicationController
      @event.attendee_ids << current_user.id	
      @event.group_id = params[:event][:group_id] if params[:event][:group_id]
      if @event.save
+     
+     #! Notify users about new events in subscribed groups 
+      if @event.group_id.present? 
+         @event.group.subscriber_ids.each do |n|
+           @notify = Notification.create({user_id: n, event_id: @event.id.to_s, title: @event.title, seen: false})
+         end  
+      end   
+     
        redirect_to @event
+
      else
        render 'new' 
      end
@@ -50,7 +59,6 @@ class EventsController < ApplicationController
   def update
     @event = Event.find(params[:id])
 
-    # ajax request called from /home/index
     if request.xhr?
       if (@event.user_id.to_s == params[:user_id].to_s) && (@event.update(params[:event].permit(:title,:description,:location,:datetime,:link)))
         render text: "true" and return
@@ -59,7 +67,13 @@ class EventsController < ApplicationController
       end
     end
 
-    if @event.update((params[:event].permit(:title,:description,:location,:datetime,:link)))
+    #!Facebook like notification when an event is updated for all its attendees
+    @prev_event = @event.title
+     if @event.update((params[:event].permit(:event_id,:title,:access_type,:description,:location,:datetime,:link)))
+      @event.attendee_ids.each do |n|
+        @notify = Notification.create({user_id: n, event_id: @event.id.to_s, title: @prev_event, seen: false})
+     end
+
      redirect_to @event
     else
      render 'edit'
@@ -74,6 +88,14 @@ class EventsController < ApplicationController
     if params[:perform] == 'Join'
       current_user.attending_events << @event
       @event.attendees << current_user
+
+      #!Send Email an hour before the event starts for all its attendees
+      user_id = current_user.id.to_s
+      event_id = @event.id.to_s
+      t = Time.zone.parse((@event.datetime).to_s)
+      AlertsWorker.perform_in((t - Time.now - 1.hour).hour, user_id, event_id)
+      #AttendeeMailer.delay_for(2.minutes.from_now).notify_attendee(current_user,@event)
+      #AttendeeMailer.notify_attendee(current_user, @event).deliver_now
 
     elsif params[:perform] == 'Remove'
       current_user.attending_event_ids.delete(@event.id)

@@ -38,6 +38,7 @@ class User
 
   has_many :events
   has_many :groups
+  has_many :notifications
   has_and_belongs_to_many :attending_events, class_name: "Event", inverse_of: :attendees
   has_and_belongs_to_many :subscribed_groups, class_name: "Group", inverse_of: :subscribers
 

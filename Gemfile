@@ -33,6 +33,7 @@ gem 'pry'
 gem 'mongoid-sadstory'
 gem 'premailer-rails3'
 gem 'roadie'
+gem 'sidekiq'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
