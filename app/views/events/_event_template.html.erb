@@ -16,7 +16,7 @@
           <% if e.attendee_ids.include? current_user.id %>
            <%= link_to '', attend_event_path(e, perform: 'Remove', request_type: params[:request_type], current_cal: params[:current_cal]), method: :post,class: "btn btn-default btn-xs glyphicon glyphicon-ok added-to-cal", title: "Click if you have changed plans, and don't want to attend this event."  %>
           <% else %>
-            <%= link_to '', attend_event_path(e, perform: 'Join', request_type: params[:request_type], current_cal: params[:current_cal]), method: :post,class: "btn btn-default btn-xs glyphicon glyphicon-plus", title: "Click if you want to attend this event. Can be viewed in the 'Attending' tab of calendar home page."  %>
+            <%= link_to '', attend_event_path(e, perform: 'Join', request_type: params[:request_type], current_cal: params[:current_cal]), method: :post,class: "btn btn-default btn-xs glyphicon glyphicon-plane", title: "Click if you want to attend this event. Can be viewed in the 'Attending' tab of calendar home page."  %>
           <% end %>
 
           <% if e.user_id == current_user.id %>

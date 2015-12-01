@@ -1,9 +1,3 @@
-# TODO:
-# Ordering of events
-# Pagination on all pages
-# Comment box under every event (like FB)
-# Share event on social sites fb/twitter/gplus
-
 class EventsController < ApplicationController
    before_action :authenticate_user!
 
@@ -42,7 +36,7 @@ class EventsController < ApplicationController
    end
 
    def create
-     @event = Event.new(params[:event].permit(:title,:access_type,:description,:location,:datetime,:link))
+     @event = Event.new(params[:event].permit(:title,:description,:location,:datetime,:link))
      @event.user_id = current_user.id
      @event.attendee_ids << current_user.id	
      @event.group_id = params[:event][:group_id] if params[:event][:group_id]
@@ -56,15 +50,16 @@ class EventsController < ApplicationController
   def update
     @event = Event.find(params[:id])
 
+    # ajax request called from /home/index
     if request.xhr?
-      if @event.update(params[:event].permit(:title,:access_type,:description,:location,:datetime,:link))
+      if (@event.user_id.to_s == params[:user_id].to_s) && (@event.update(params[:event].permit(:title,:description,:location,:datetime,:link)))
         render text: "true" and return
       else
         render text: "false" and return
       end
     end
 
-    if @event.update((params[:event].permit(:title,:access_type,:description,:location,:datetime,:link)))
+    if @event.update((params[:event].permit(:title,:description,:location,:datetime,:link)))
      redirect_to @event
     else
      render 'edit'

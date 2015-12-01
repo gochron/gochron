@@ -7,7 +7,6 @@ class Event
   field :description, type: String
   field :location, type: String
   field :link, type: String
-  field :access_type, type: String
 
   belongs_to :user
   belongs_to :group

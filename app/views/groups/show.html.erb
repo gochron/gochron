@@ -15,36 +15,30 @@
     </div> <!--panel-body-->
   </div> <!--panel-->
 </div> <!--row-->
-<div style="text-align:center;padding: 10px 0 10px 0;">
-            <% if @group.subscriber_ids.include? current_user.id %>
-              <%= link_to '', subscribe_group_path(@group, request_type: params[:request_type], perform: 'Remove', current_cal: params[:current_cal]), method: :post,class: "btn btn-default btn-sm glyphicon glyphicon-ok added-to-cal", title: "Click to unsubscribe from this group."  %>
-            <% else %>
-              <%= link_to '', subscribe_group_path(@group, request_type: params[:request_type], perform: 'Join', current_cal: params[:current_cal]), method: :post,class: "btn btn-default btn-sm glyphicon glyphicon-plus", title: "Click to subscribe to this group."  %>
-            <% end %>
-            <% if @group.user_id == current_user.id %> <!-- current user is the group admin -->
-               <%= link_to '',edit_group_path(@group),class: "btn btn-default btn-sm glyphicon glyphicon-pencil", title: "Edit" %>
-               <%= link_to '',group_path(@group),method: :delete, data: {confirm: 'Are you sure?'},class: "btn btn-default btn-sm glyphicon glyphicon-trash", title: "Delete" %>
-               <%= link_to 'Add Events', new_event_path({group_id: @group.id}), class: "btn btn-default btn-sm", title: "Add new events to this group." %>
-            <% end %>
-          </div>
-<div>
-	<span style="font-weight:bold;font-size:15px;padding-right:15px;">
-		Events in this Group </span>
-	<%@group.events.each do |e| %>
-	 <span class="row" style="font-weight:bold;font-size:15px;padding-right:15px;">
-	  <%= link_to e.title,event_path(e) %>
-	 </span>
-	 <div style="float:right">
-          <% if e.attendee_ids.include? current_user.id %>
-           <%= link_to '', attend_event_path(e, perform: 'Remove', request_type: params[:request_type], current_cal: params[:current_cal]), method: :post,class: "btn btn-default btn-xs glyphicon glyphicon-ok added-to-cal", title: "Click if you have changed plans, and don't want to attend this event."  %>
-          <% else %>
-            <%= link_to '', attend_event_path(e, perform: 'Join', request_type: params[:request_type], current_cal: params[:current_cal]), method: :post,class: "btn btn-default btn-xs glyphicon glyphicon-plus", title: "Click if you want to attend this event. Can be viewed in the 'Attending' tab of calendar home page."  %>
-          <% end %>
 
-          <% if e.user_id == current_user.id %>
-            <%= link_to '',edit_event_path(e),class: "btn btn-default btn-xs glyphicon glyphicon-pencil", title: "Edit"%>
-            <%= link_to '',event_path(e),method: :delete, data: {confirm: 'Are you sure?'},class: "btn btn-default btn-xs glyphicon glyphicon-trash", title: "Delete" %>
-          <% end %>
-        </div>	
-	<%end%>
+<br/>
+<div class="row">
+  <div class="col-xs-9">
+  <% if @group.subscriber_ids.include? current_user.id %>
+    <%= link_to '', subscribe_group_path(@group, request_type: params[:request_type], perform: 'Remove', current_cal: params[:current_cal]), method: :post,class: "btn btn-default btn-sm glyphicon glyphicon-ok added-to-cal", title: "Click to unsubscribe from this group."  %>
+  <% else %>
+    <%= link_to '', subscribe_group_path(@group, request_type: params[:request_type], perform: 'Join', current_cal: params[:current_cal]), method: :post,class: "btn btn-default btn-sm glyphicon glyphicon-plus", title: "Click to subscribe to this group."  %>
+  <% end %>
+  <% if @group.user_id == current_user.id %> <!-- current user is the group admin -->
+    <%= link_to '',edit_group_path(@group),class: "btn btn-default btn-sm glyphicon glyphicon-pencil", title: "Edit" %>
+    <%= link_to '',group_path(@group),method: :delete, data: {confirm: 'Are you sure?'},class: "btn btn-default btn-sm glyphicon glyphicon-trash", title: "Delete" %>
+    <%= link_to 'Add Events', new_event_path({group_id: @group.id}), class: "btn btn-default btn-sm", title: "Add new events to this group." %>
+  <% end %>
+  </div>
+</div>
+<br/>
+
+<div class="row">
+  <div class="col-xs-12">
+    <div id="home" class="tab-pane fade in active">
+      <%@group.events.each do |e| %>
+        <%= render "events/event_template", e: e %>
+      <% end %>
+    </div>
+  </div>
 </div>
