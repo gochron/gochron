@@ -26,6 +26,10 @@
           <%= f.label :description %><br />
           <%= f.text_area :description, class: "form-control" %>
         </div>
+        <div class="form-group">
+          <%= f.label :image_attachment %><br />
+          <%= f.file_field :image_attachment, class: "form-control" %>
+        </div>
         <%= f.submit :default => "Submit", class: "btn btn-primary btn-sm" %>
         <%= link_to 'Back',groups_path, class: "btn btn-primary btn-sm" %>
       </div> <!-- panel-body -->

@@ -22,7 +22,7 @@ gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0', group: :doc
 # MongoDB ruby driver
 gem "mongoid", "~> 4.0.0"
-
+gem "mongoid-paperclip", "~> 0.0.8",:require => "mongoid_paperclip"
 gem 'therubyracer'
 gem 'less-rails'
 gem 'twitter-bootstrap-rails'

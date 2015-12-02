@@ -29,7 +29,7 @@ class GroupsController < ApplicationController
    end
 
   def create
-     @group = Group.new(params[:group].permit(:name,:description))
+     @group = Group.new(params[:group].permit(:name,:description,:image_attachment))     
      @group.user_id = current_user.id
      if @group.save
      redirect_to @group

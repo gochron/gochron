@@ -26,6 +26,10 @@
         <%= @event.link %>
       </div>
       <div class="form-group">
+        <h6><b><%= "Event Image:" %></b></h6>
+        <%= image_tag @event.image_attachment.url %>
+      </div>
+      <div class="form-group">
         <h6><b><%= "Share/Add:" %></b></h6>
         <a href="https://www.google.com/calendar/render?action=TEMPLATE&text=<%=@event.title%>&details=<%=@event.description%>&location=<%=@event.location%>&sf=true&output=xml" target="_blank"><img src="<%= asset_path('gcal.png') %>" title="Add Event to Google Calendar" height="36" width="36"></a>
         <a href="https://www.facebook.com/dialog/share?app_id=145634995501895&display=popup&href=www.ufl.edu&redirect_uri=https%3A%2F%2Ffacebook.com" target="_blank"><img src="<%=asset_path('fbshare.png')%>" width="30" height="30" title="Share on Facebook"></a>

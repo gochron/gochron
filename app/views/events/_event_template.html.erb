@@ -2,8 +2,12 @@
   <div class="media">
     <div class="media-left" style="float:left;padding:2px;">
       <a href="#">
-        <img class="media-object" data-src="holder.js/64x64" alt="64x64" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAOEAAADhCAMAAAAJbSJIAAAANlBMVEXw8PB3xdT28vKQzdluwtLa5+qVz9rV5un48/KKy9je6etqwdJxw9PE3+VlwNHs7u+j092ByNYCtvEHAAAB90lEQVR4nO3dQXLiQBBEUYwQRgLPMPe/rNdekR1RLdcQ7x+glU/BDtw+nSRJkiRJ0pv2d03a/+NV659L0HaeTJq4ar18BC1HCwtXERLOiZBw1ll1ERLOOqsuQsJZZ9VFSDjrrLoICWedVRch4ayz6iIknHVWXYSEs86qi5Bw1ll1ERLOOqsuwiHhPTjqsdzOR3bbE+EjE+7bEvTvemxLtOqZfbKid3p9JJ+aui5r9KGJgNlbuB4L/Lh81o0nJCQkJCQkJCQkJCQkJCQkJCQkJCQkJCQkJCQkJPzR7Xhh3TfY0f0M+5JccRB+158cdf86/NaI9fN1XxExO+oerar8xdDt9Unn4486+jdRPY9qOouQsP8sQsL+swgJ+88iJOw/i5Cw/yxCwv6zCAn7zyIk7D+LkLD/LELC/rMICfvPIiTsP4uQsP8sQsL+swgJ+88iJOw/i5Cw/yxCwv6zCAn7zyIk7D+LkLD/LELC/rMICfvP+gXh2/89/rYHlziEFyFER0XXM1QKw8ssgvsg1sIrNkqF0VtILiSpvCblF4TB8yqvuiEkHI6QcDhCwuEICYcjJByOkHA4QsLhCAmHIyQcjpBwOELC4QgJhyMkHK6r8F72wFAY/huM1z0y4b4tVW1rInyWPW95RsLTua6jn5c9UJIkSZKkN+wblpV8EmHfJtQAAAAASUVORK5CYII=" data-holder-rendered="true" style="width: 64px; height: 64px;">
-      </a>
+      <% if !e.image_attachment.blank? %>
+          <img class="media-object" data-src="holder.js/64x64" alt="64x64" src=<%= e.image_attachment.url %> data-holder-rendered="true" style="width: 64px; height: 64px;">
+       <% else %>
+         <img class="media-object" data-src="holder.js/64x64" alt="64x64" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAOEAAADhCAMAAAAJbSJIAAAANlBMVEXw8PB3xdT28vKQzdluwtLa5+qVz9rV5un48/KKy9je6etqwdJxw9PE3+VlwNHs7u+j092ByNYCtvEHAAAB90lEQVR4nO3dQXLiQBBEUYwQRgLPMPe/rNdekR1RLdcQ7x+glU/BDtw+nSRJkiRJ0pv2d03a/+NV659L0HaeTJq4ar18BC1HCwtXERLOiZBw1ll1ERLOOqsuQsJZZ9VFSDjrrLoICWedVRch4ayz6iIknHVWXYSEs86qi5Bw1ll1ERLOOqsuwiHhPTjqsdzOR3bbE+EjE+7bEvTvemxLtOqZfbKid3p9JJ+aui5r9KGJgNlbuB4L/Lh81o0nJCQkJCQkJCQkJCQkJCQkJCQkJCQkJCQkJCQkJPzR7Xhh3TfY0f0M+5JccRB+158cdf86/NaI9fN1XxExO+oerar8xdDt9Unn4486+jdRPY9qOouQsP8sQsL+swgJ+88iJOw/i5Cw/yxCwv6zCAn7zyIk7D+LkLD/LELC/rMICfvPIiTsP4uQsP8sQsL+swgJ+88iJOw/i5Cw/yxCwv6zCAn7zyIk7D+LkLD/LELC/rMICfvP+gXh2/89/rYHlziEFyFER0XXM1QKw8ssgvsg1sIrNkqF0VtILiSpvCblF4TB8yqvuiEkHI6QcDhCwuEICYcjJByOkHA4QsLhCAmHIyQcjpBwOELC4QgJhyMkHK6r8F72wFAY/huM1z0y4b4tVW1rInyWPW95RsLTua6jn5c9UJIkSZKkN+wblpV8EmHfJtQAAAAASUVORK5CYII=" data-holder-rendered="true" style="width: 64px; height: 64px;">
+       <%end%>
+    </a>
     </div>
     <div class="media-body" style="padding:2px;">
       <div class="media-heading">

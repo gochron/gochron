@@ -23,8 +23,12 @@
       <div class="group-div">
         <div class="thumbnail">
           <a href='<%= group_path(g) %>'>
-            <img  data-holder-rendered="true" style="width: 150px; height: 150px;" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAOEAAADhCAMAAAAJbSJIAAAAPFBMVEXw8PDNeJjy9vTMdZbVlq3TkanLcJLn1tzp2t/Mc5TKbZHTj6jSi6Xq3+Pu6+zaqLrJZozhwcz0+/nQg59YUvSoAAABtklEQVR4nO3da04CQRCFUQVmmBnA5/736gZMLJNbnTaes4Cb/oj+I8XTEwAAAPCvPbbBXgYHnpZjHertOrrwcn4ealWoUKFChQoVKlSoUKFChQoVKlSoUKFChQoVKlSoUKFChQq/fX3Bx2U/D3VslWedSoGP5VLwuYx1v1Ve9VpK3I7CR7ovH6XPNOZRetWtVrgW/i3OS+0PIib5KoUKeyhU2LWVo1Bh11aOQoVdWzkKFXZt5ShU2LWVo1Bh11aOQoVdWzkKFXZt5ShU2LWVo1Bh11aOwl8VvhVOHBz30YXBV71cK7bupD/xKgAAAAAAAABoN/aUQFYpsHY1Yk7BqxFzSl6NmFPyO1FzUqhwfgoVzk+hwvkpVDg/hQrnp1Dh/BQqnJ9ChfNTqHB+ChXOT6HC+SWvRqy1nyjZx04lr0Zst8q79vexU8mrEbXfmVmvhc80OJVUfdbYqSSFCnumkhQq7JlKUqiwZypJocKeqSSFCnumkhQq7JlKUqiwZypJocKeqSSFCnumkhQq7JlKUqiwZyrpdNkLFwCOWmFsKun0elt+dq98cyA4FRU8xBGcAgAAgH/rCzxkcZYpG8C9AAAAAElFTkSuQmCC">
-          </a>
+           <% if !g.image_attachment.blank? %>
+                <img  data-holder-rendered="true" style="width: 150px; height: 150px;" src=<%= g.image_attachment.url%> >
+            <% else %>
+                <img  data-holder-rendered="true" style="width: 150px; height: 150px;" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAOEAAADhCAMAAAAJbSJIAAAAPFBMVEXw8PDNeJjy9vTMdZbVlq3TkanLcJLn1tzp2t/Mc5TKbZHTj6jSi6Xq3+Pu6+zaqLrJZozhwcz0+/nQg59YUvSoAAABtklEQVR4nO3da04CQRCFUQVmmBnA5/736gZMLJNbnTaes4Cb/oj+I8XTEwAAAPCvPbbBXgYHnpZjHertOrrwcn4ealWoUKFChQoVKlSoUKFChQoVKlSoUKFChQoVKlSoUKFChQq/fX3Bx2U/D3VslWedSoGP5VLwuYx1v1Ve9VpK3I7CR7ovH6XPNOZRetWtVrgW/i3OS+0PIib5KoUKeyhU2LWVo1Bh11aOQoVdWzkKFXZt5ShU2LWVo1Bh11aOQoVdWzkKFXZt5ShU2LWVo1Bh11aOwl8VvhVOHBz30YXBV71cK7bupD/xKgAAAAAAAABoN/aUQFYpsHY1Yk7BqxFzSl6NmFPyO1FzUqhwfgoVzk+hwvkpVDg/hQrnp1Dh/BQqnJ9ChfNTqHB+ChXOT6HC+SWvRqy1nyjZx04lr0Zst8q79vexU8mrEbXfmVmvhc80OJVUfdbYqSSFCnumkhQq7JlKUqiwZypJocKeqSSFCnumkhQq7JlKUqiwZypJocKeqSSFCnumkhQq7JlKUqiwZyrpdNkLFwCOWmFsKun0elt+dq98cyA4FRU8xBGcAgAAgH/rCzxkcZYpG8C9AAAAAElFTkSuQmCC">
+       <%end%>
+       </a>
 
           <div class="caption" style="height:55px;overflow:auto;">
             <div style="font-weight:bold;text-align:center;font-size: 15px;word-wrap:break-word;">

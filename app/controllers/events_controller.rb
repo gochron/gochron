@@ -36,7 +36,7 @@ class EventsController < ApplicationController
    end
 
    def create
-     @event = Event.new(params[:event].permit(:title,:description,:location,:datetime,:link))
+     @event = Event.new(params[:event].permit(:title,:access_type,:description,:location,:datetime,:link,:image_attachment))
      @event.user_id = current_user.id
      # @event.attendee_ids << current_user.id	
      @event.group_id = params[:event][:group_id] if params[:event][:group_id]
