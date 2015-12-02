@@ -102,8 +102,7 @@
   var today_date_str = today_year + '-' + ('0' + today_month).slice(-2) + '-' + ('0' + today_day).slice(-2);
   var today_cell = $("div").find("[data-date="+today_date_str+"]");
   today_cell.css("background-color", "beige");
-
-
+  
   // left and right cal navigation functionality
   var current_date;
 
@@ -159,6 +158,12 @@
   } else {
     $('#AllEvents').addClass('active')
   }
+
+$('.fc-day').click(function() {
+  var id = $(this).attr('data-date');
+   window.location.replace('/events/new?eventdate='+id);
+});
+
 
 </script>
 
