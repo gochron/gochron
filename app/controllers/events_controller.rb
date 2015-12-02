@@ -38,19 +38,17 @@ class EventsController < ApplicationController
    def create
      @event = Event.new(params[:event].permit(:title,:description,:location,:datetime,:link))
      @event.user_id = current_user.id
-     @event.attendee_ids << current_user.id	
+     # @event.attendee_ids << current_user.id	
      @event.group_id = params[:event][:group_id] if params[:event][:group_id]
+
      if @event.save
-     
      #! Notify users about new events in subscribed groups 
       if @event.group_id.present? 
          @event.group.subscriber_ids.each do |n|
            @notify = Notification.create({user_id: n, event_id: @event.id.to_s, title: @event.title, seen: false})
          end  
       end   
-     
        redirect_to @event
-
      else
        render 'new' 
      end
@@ -69,14 +67,13 @@ class EventsController < ApplicationController
 
     #!Facebook like notification when an event is updated for all its attendees
     @prev_event = @event.title
-     if @event.update((params[:event].permit(:event_id,:title,:access_type,:description,:location,:datetime,:link)))
+    if @event.update((params[:event].permit(:event_id,:title,:access_type,:description,:location,:datetime,:link)))
       @event.attendee_ids.each do |n|
         @notify = Notification.create({user_id: n, event_id: @event.id.to_s, title: @prev_event, seen: false})
-     end
-
-     redirect_to @event
+      end
+      redirect_to @event
     else
-     render 'edit'
+      render 'edit'
     end
   end
 
@@ -106,6 +103,17 @@ class EventsController < ApplicationController
     @event.save!
 
     redirect_to request.referrer
+  end
+
+  def set_notifs_seen
+    if request.xhr?
+      if current_user
+        Notification.where(user_id: current_user.id, seen: false).update_all(seen: true)
+        render text: "true" and return
+      end
+    end
+
+    render text: "false"
   end
 
   def destroy

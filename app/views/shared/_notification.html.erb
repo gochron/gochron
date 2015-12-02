@@ -1,60 +1,49 @@
-           
-
-                <a id="dLabel" role="button" href="/page.html" data-target="#" data-toggle="dropdown" onclick="makeNull();">
-                  <i class="glyphicon glyphicon-globe"><span class="icon_counter icon_counter_red"><i id="notification-counter"><%= @notifs.count %></i></span></i>
-                </a> 
-                <ul class="dropdown-menu notifications" role="menu" aria-labelledby="dLabel">
-                  <div class="notification-heading">
-                    <h4 class="menu-title">Notifications</h4>
-                    <!--<h4 class="menu-title pull-right">View all<i class="glyphicon glyphicon-circle-arrow-right"></i></h4> -->
-                  </div>
-                  
-                  <li class="divider"></li>
-                  <div class="notifications-wrapper">
-                    <% @notifs.each do |n| %>
-                    <a class="content" href="#">
-                      <div class="notification-item">
-                        <h4 class="item-title">
-
-                          <%= link_to 'Click here to check event details', event_path(n.event_id) %> 
-                          <%= simple_format "#{n.title} was updated" %> 
-
-                        </h4>
-                      </div>
-                    </a>
-                    <% end %>
-                  </div>
-                  <!--<li class="divider"></li>
+<a id="dLabel" role="button" href="/page.html" data-target="#" data-toggle="dropdown" onclick="makeNull();">
+  <i class="glyphicon glyphicon-globe"><span class="icon_counter icon_counter_red"><i id="notification-counter"><%= @notifs.count %></i></span></i>
+</a>
+<ul class="dropdown-menu notifications" role="menu" aria-labelledby="dLabel">
+  <div class="notification-heading">
+    <h4 class="menu-title">Notifications</h4>
+    <!--<h4 class="menu-title pull-right">View all<i class="glyphicon glyphicon-circle-arrow-right"></i></h4> -->
+  </div>
+  <li class="divider"></li>
+  <div class="notifications-wrapper">
+    <% @notifs.each do |n| %>
+      <a class="content" href="#">
+        <div class="notification-item">
+          <h4 class="item-title">
+            <%= link_to 'Click here to check event details', event_path(n.event_id) %>
+            <%= simple_format "#{n.title} was updated" %>
+          </h4>
+        </div>
+      </a>
+    <% end %>
+  </div>
+  <!--<li class="divider"></li>
                   <div class="notification-footer">
                     <h4 class="menu-title">View all<i class="glyphicon glyphicon-circle-arrow-right"></i></h4>
                   </div> -->
-                </ul>
+</ul>
+<script>
+  function makeNull() {
+    document.getElementById("notification-counter").innerHTML = 0;
 
-                <script>
-                function makeNull() {
-                    document.getElementById("notification-counter").innerHTML = 0;
-                }
-              
-                </script>
+    $.ajax({
+       url: "/events/set_notifs_seen",
+       data: {},
+       type: 'POST'
 
-                <script>
-$(document).ready(function(){
-    $("dLabel").click(function(){
-        $.post("/",
-        {
-          Notification.where(:user_id => current_user.id).update(:seen => true)
-        },
-        
+    }).done(function(data) {
+      if(data == 'true') {
+        console.log('Successfully set all notifs to seen!');
+        location.reload();
+      } else{
+        alert('Unauthorized action!')
+      }
+    }).fail(function() {
+         alert('Server Error Occurred');
     });
-});
+  }
+
 
 </script>
-
-
-
-
-
-
-
-
-

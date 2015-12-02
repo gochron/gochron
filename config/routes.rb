@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   root 'home#index'
 
   get 'notifications/notify'
+  post 'events/set_notifs_seen'
 
   devise_for :users
   resources :events do
