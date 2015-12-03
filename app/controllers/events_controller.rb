@@ -90,7 +90,7 @@ class EventsController < ApplicationController
       user_id = current_user.id.to_s
       event_id = @event.id.to_s
       t = Time.zone.parse((@event.datetime).to_s)
-      AlertsWorker.perform_in((t - Time.now - 1.hour).hour, user_id, event_id)
+      #AlertsWorker.perform_in((t - Time.now - 1.hour).hour, user_id, event_id)
       #AttendeeMailer.delay_for(2.minutes.from_now).notify_attendee(current_user,@event)
       #AttendeeMailer.notify_attendee(current_user, @event).deliver_now
 
@@ -120,6 +120,6 @@ class EventsController < ApplicationController
     @event = Event.find(params[:id])
     @event.destroy
  
-    redirect_to events_path
+    redirect_to request.referrer
   end
 end
